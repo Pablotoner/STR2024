@@ -31,7 +31,7 @@ package body fss is
     -- Aqui se declaran los objetos protegidos para los datos compartidos  
     protected valores is
         function getPowerSetting return Power_Samples_Type;
-        procedure setPowerSetting(nuevoValor : Power_Samples_Type; --innecesario???
+        --procedure setPowerSetting(nuevoValor : Power_Samples_Type; --innecesario???
         function getSpeed return Speed_Samples_Type;
         procedure setSpeed(nuevoValor : Speed_Samples_Type);
         function getRoll return Roll_Samples_Type;
@@ -67,6 +67,27 @@ package body fss is
             Set_Speed(speed);
         end setSpeed;
         
+        function getPitch return Pitch_Samples_Type is
+        begin
+            Read_Pitch(pitch);
+            return pitch;
+        end getPitch;
+
+        procedure setPitch(nuevoValor : Pitch_Samples_Type) is
+            pitch := nuevoValor;
+            Set_Pitch(pitch);
+        end setPitch;
+
+        function getJoystick return Joystick_Samples_Type is
+            Read_Joystick(joystick);
+            return joystick;
+        end getJoystick;
+
+        --el programa no debe hacer set del joystick al ser input del piloto,
+        --setJoystick innecesario?????? los demas sets de inputs tambien??
+        procedure setJoystick(nuevoValor : Joystick_Samples_Type) is
+            joystick := nuevoValor;
+        end setJoystick;
     end valores;
     -----------------------------------------------------------------------
     ------------- declaration of tasks 
