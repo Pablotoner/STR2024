@@ -27,10 +27,12 @@ package body fss is
     -----------------------------------------------------------------------
     ------------- declaration of protected objects 
     -----------------------------------------------------------------------
-
+    --el objeto protegido tiene que tenere la prioridad mayor de todas las tareas que lo utilizan
+    -- 1 solo objeto protegido compartido entre velocidad y posicion-altitud?
+    --semaforo desde que 1 toca el objeto hasta que sale?
     -- Aqui se declaran los objetos protegidos para los datos compartidos  
     protected valores is
-        function getPowerSetting return Power_Samples_Type;
+        procedure getPowerSetting(P: out Power_Samples_Type);
         --procedure setPowerSetting(nuevoValor : Power_Samples_Type; --innecesario???
         function getSpeed return Speed_Samples_Type;
         procedure setSpeed(nuevoValor : Speed_Samples_Type);
@@ -38,10 +40,10 @@ package body fss is
         procedure setRoll(nuevoValor : Roll_Samples_Type);
         function getPitch return Pitch_Samples_Type;
         procedure setPitch(nuevoValor : Pitch_Samples_Type);
-        function getJoystick return Joystick_Samples_Type;
+        procedure getJoystick (J: out Joystick_Samples_Type);
         procedure setJoystick(nuevoValor : Joystick_Samples_Type);
     private
-        power : Power_Samples_Type;
+        power : Power_Samples_Type; --cambiado a no usar variables privadas, está bien???
         speed : Speed_Samples_Type;
         pitch : Pitch_Samples_Type;
         roll : Roll_Samples_Type;
@@ -49,43 +51,50 @@ package body fss is
     end valores;
 
     protected body valores is
-        function getPowerSetting return Power_Samples_Type is
+        procedure getPowerSetting (P: out Power_Samples_Type) is
         begin
-            Read_Power(power);
-            return power;
+            Read_Power(P);
         end getPowerSetting;
 
         function getSpeed return Speed_Samples_Type is
         begin
-            Read_Speed(speed);
-            return speed;
+            return Read_Speed;
         end getSpeed;
 
         procedure setSpeed(nuevoValor : Speed_Samples_Type) is
         begin
-            speed := nuevoValor;
-            Set_Speed(speed);
+            Set_Speed(nuevoValor);
         end setSpeed;
+
+        function getRoll return Roll_Samples_Type is
+        begin
+            return Read_Roll;
+        end getRoll;
+
+        procedure setRoll(nuevoValor : Roll_Samples_Type) is
+        begin
+            Set_Aircraft_Roll(nuevoValor);
+        end setRoll;
         
         function getPitch return Pitch_Samples_Type is
         begin
-            Read_Pitch(pitch);
-            return pitch;
+            return Read_Pitch;
         end getPitch;
 
         procedure setPitch(nuevoValor : Pitch_Samples_Type) is
-            pitch := nuevoValor;
-            Set_Pitch(pitch);
+        begin
+            Set_Aircraft_Pitch(nuevoValor);
         end setPitch;
 
-        function getJoystick return Joystick_Samples_Type is
-            Read_Joystick(joystick);
-            return joystick;
+        procedure getJoystick (J: out Joystick_Samples_Type) is
+        begin
+            Read_Joystick(J);
         end getJoystick;
 
         --el programa no debe hacer set del joystick al ser input del piloto,
         --setJoystick innecesario?????? los demas sets de inputs tambien??
         procedure setJoystick(nuevoValor : Joystick_Samples_Type) is
+        begin
             joystick := nuevoValor;
         end setJoystick;
     end valores;
@@ -96,6 +105,8 @@ package body fss is
     -- Aqui se declaran las tareas que forman el STR
     task controlVelocidad is pragma priority(1);
     end controlVelocidad;
+    --task controlAltCabAla is pragma priority(2);
+    --end controlAltCabAla;
 
     -----------------------------------------------------------------------
     ------------- body of tasks 
@@ -117,8 +128,8 @@ package body fss is
             targetSpeed := Speed_Samples_Type(float(currentPowerSetting) * 1.2); --velocidad objetivo
             currentPitch := 5; --CAMBIAR
             currentRoll := 5; --CAMBIAR
-            currentSpeed := Read_Speed;
-            Read_Joystick(currentJoystick);
+            currentSpeed := valores.getSpeed;
+            valores.getJoystick(currentJoystick);
             
             Display_Message("Velocidad actual leida: ");
             Display_Speed(currentSpeed);
@@ -166,15 +177,23 @@ package body fss is
                 targetSpeed := 1000;
             end if;
             --posible fallo al convertir entre power setting y velocidad
-            Set_Speed(targetSpeed); --no asignar valor a targetSpeed hasta no haber tomado una decision??
+            valores.setSpeed(targetSpeed); --no asignar valor a targetSpeed hasta no haber tomado una decision??
             Display_Message("Velocidad objetivo decidido");
             Display_Speed(targetSpeed);
             Finish_Activity("Tarea Velocidad");
             New_Line;
         delay until (Clock + To_time_Span(0.3));
         end loop;
-    end controlVelocidad; --FALTA SEGUIR CON LAS PRUEBAS
+    end controlVelocidad;
 
+    --task body controlAltCabAla is
+    --    currentAltitude : Altitude_Samples_Type;
+    --    currentJoystick : Joystick_Samples_Type;
+    --    currentPitch : Pitch_Samples_Type;
+    --    currentRoll : Roll_Samples_Type;
+    --begin
+    --    loop
+    --        currentJoystick := getJoystick`
     ----------------------------------------------------------------------
     ------------- procedimientos para probar los dispositivos 
     ------------- SE DEBERÁN QUITAR PARA EL PROYECTO
