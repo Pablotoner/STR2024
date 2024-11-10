@@ -42,6 +42,9 @@ package body fss is
         procedure setPitch(nuevoValor : Pitch_Samples_Type);
         procedure getJoystick (J: out Joystick_Samples_Type);
         procedure setJoystick(nuevoValor : Joystick_Samples_Type);
+        function getAltitude return Altitude_Samples_Type;
+        procedure getObstacle return Distance_Samples_Type;
+        procedure getPresencia return PilotPresence_Samples_Type;
     private
         power : Power_Samples_Type; --cambiado a no usar variables privadas, está bien???
         speed : Speed_Samples_Type;
@@ -97,21 +100,36 @@ package body fss is
         begin
             joystick := nuevoValor;
         end setJoystick;
+
+        funtion getAltitude return Altitude_Samples_Type is
+        begin
+            return Read_Altitude;
+        end getAltitude;
+
+        procedure getObstacle return Distance_Samples_Type is
+            return Read_Distance;
+        end getObstacle;
+
+        procedure getPresencia return PilotPresence_Samples_Type is
+            return Read_PilotPresence;
+        end getPresencia;
+        
     end valores;
     -----------------------------------------------------------------------
     ------------- declaration of tasks 
     -----------------------------------------------------------------------
---Periodo mas pequeño -> prioridad mas alta
+--Periodo mas pequeño -> prioridad mas alta, cambiarlas por variables
     -- Aqui se declaran las tareas que forman el STR
     task controlVelocidad is pragma priority(1);
     end controlVelocidad;
-    --task controlAltCabAla is pragma priority(2);
-    --end controlAltCabAla;
+    task controlAltCabAla is pragma priority(2);
+    end controlAltCabAla;
+    task controlColision is pragma priority(3);
+    end controlColision;
 
     -----------------------------------------------------------------------
     ------------- body of tasks 
     -----------------------------------------------------------------------
---Vvertical = Va * sen(pitch)
     -- Aqui se escriben los cuerpos de las tareas 
     task body controlVelocidad  is
         currentPowerSetting : Power_Samples_Type;
@@ -186,14 +204,104 @@ package body fss is
         end loop;
     end controlVelocidad;
 
-    --task body controlAltCabAla is
-    --    currentAltitude : Altitude_Samples_Type;
-    --    currentJoystick : Joystick_Samples_Type;
-    --    currentPitch : Pitch_Samples_Type;
-    --    currentRoll : Roll_Samples_Type;
-    --begin
-    --    loop
-    --        currentJoystick := getJoystick`
+    task body controlAltCabAla is
+        currentAltitude : Altitude_Samples_Type;
+        currentJoystick : Joystick_Samples_Type;
+        currentPitch : Pitch_Samples_Type;
+        currentRoll : Roll_Samples_Type;
+        targetPitch : Pitch_Samples_Type;
+        targetRoll : Roll_Samples_Type;
+    begin
+        loop
+            currentJoystick := getJoystick;
+            currentAltitude := getAltitude;
+            targetPitch := currentJoystick(x);
+            if currentAltitude < 2500 then
+                Light_1(On);
+                if currentAltitude < 2000 and targetPitch < 0 then
+                    targetPitch := 0;
+                end if;
+            end if;
+
+            if currentAltitude > 9500 then
+                Light_1(On);
+                if currentAltitude > 10000 and targetPitch > 0 then
+                    targetPitch := 0;
+                end if;
+            end if;
+
+            if currentPitch > 30 then
+                targetPitch := 30
+            end if;
+
+            if currentPitch < -30 then
+                targetPitch := -30;
+            end if;
+
+            if currentPitch > -3 and currentPitch < 3 then
+                targetPitch := 0;
+            end if;
+
+            setPitch(targetPitch);
+
+            
+            targetRoll := currentJoystick(y);
+
+            if targetRoll > 35 or targetRoll < -35 then
+                Display_Message("Cabeceo excesivo!");
+
+                if targetRoll > 45 then --"No se transferirán a la aeronave" limitar o 0???
+                    targetRoll := 45;
+                end if;
+
+                if targetRoll < -45 then
+                    targetRoll := -45;
+                end if;
+            end if;
+
+            valores.setRoll(targetRoll);
+            delay until (Clock + To_time_Span(0.2);
+        end loop;
+    end controlAltCabAla;
+
+    --Vvertical = Va * sen(pitch)
+    task body controlColision is
+        obstacleDistance : Distance_Samples_Type;
+        velocidadVertical : Speed_Samples_Type;
+        colisionTime : integer;
+    begin
+        loop
+            obstacleDistance := getObstacle;
+            velocidadVertical := getSpeed * sin(getPitch);
+            colisionTime := velocidadVertical / obstacleDistance;
+
+            if colisionTime < 10 then
+                Alarm(4);
+            end if;
+
+            if colisionTime < 5 then
+                --desvio automatico COMO HACER QUE SEA 3 SEGUNDOS????
+                if getAltitude <= 8500 then
+                    setPitch(20);
+                elsif >= 8500 then
+                    setRoll(45);
+                end if; --Al terminar, estabilizar, pitch y roll := 0
+            end if; --Poner un wait until aqui? O usar obj como contador?
+
+            if obstacleDistance < 500 or getPresencia = 0 then
+                if colisionTime < 15 then
+                    Alarm(4);
+                end if;
+                if colisionTime < 10 then
+                    --desvio automatico
+                end if;
+
+            end if;
+
+        delay until (Clock + To_time_Span(0.25);
+        end loop;
+
+    end controlColision;
     ----------------------------------------------------------------------
     ------------- procedimientos para probar los dispositivos 
     ------------- SE DEBERÁN QUITAR PARA EL PROYECTO
