@@ -43,8 +43,8 @@ package body fss is
         procedure getJoystick (J: out Joystick_Samples_Type);
         procedure setJoystick(nuevoValor : Joystick_Samples_Type);
         function getAltitude return Altitude_Samples_Type;
-        procedure getObstacle return Distance_Samples_Type;
-        procedure getPresencia return PilotPresence_Samples_Type;
+        function getObstacle return Distance_Samples_Type;
+        function getPresencia return PilotPresence_Samples_Type;
     private
         power : Power_Samples_Type; --cambiado a no usar variables privadas, está bien???
         speed : Speed_Samples_Type;
@@ -101,16 +101,18 @@ package body fss is
             joystick := nuevoValor;
         end setJoystick;
 
-        funtion getAltitude return Altitude_Samples_Type is
+        function getAltitude return Altitude_Samples_Type is
         begin
             return Read_Altitude;
         end getAltitude;
 
-        procedure getObstacle return Distance_Samples_Type is
+        function getObstacle return Distance_Samples_Type is
+        begin
             return Read_Distance;
         end getObstacle;
 
-        procedure getPresencia return PilotPresence_Samples_Type is
+        function getPresencia return PilotPresence_Samples_Type is
+        begin
             return Read_PilotPresence;
         end getPresencia;
         
@@ -213,8 +215,8 @@ package body fss is
         targetRoll : Roll_Samples_Type;
     begin
         loop
-            currentJoystick := getJoystick;
-            currentAltitude := getAltitude;
+            valores.getJoystick(currentJoystick);
+            currentAltitude := valores.getAltitude;
             targetPitch := currentJoystick(x);
             if currentAltitude < 2500 then
                 Light_1(On);
@@ -231,7 +233,7 @@ package body fss is
             end if;
 
             if currentPitch > 30 then
-                targetPitch := 30
+                targetPitch := 30;
             end if;
 
             if currentPitch < -30 then
@@ -242,7 +244,7 @@ package body fss is
                 targetPitch := 0;
             end if;
 
-            setPitch(targetPitch);
+            valores.setPitch(targetPitch);
 
             
             targetRoll := currentJoystick(y);
@@ -260,45 +262,59 @@ package body fss is
             end if;
 
             valores.setRoll(targetRoll);
-            delay until (Clock + To_time_Span(0.2);
+            delay until (Clock + To_time_Span(0.2));
         end loop;
     end controlAltCabAla;
 
     --Vvertical = Va * sen(pitch)
     task body controlColision is
+        contador : integer;
         obstacleDistance : Distance_Samples_Type;
         velocidadVertical : Speed_Samples_Type;
-        colisionTime : integer;
+        colisionTime : integer := -1;
     begin
         loop
-            obstacleDistance := getObstacle;
-            velocidadVertical := getSpeed * sin(getPitch);
-            colisionTime := velocidadVertical / obstacleDistance;
+            if contador > 0 then
+                contador := contador -1;
+            elsif contador = 0 then 
+                valores.setPitch(0);
+                valores.setRoll(0);
+                contador := -1;
+            else
+                obstacleDistance := valores.getObstacle; --o usar la del devices direct?
+                velocidadVertical := valores.getSpeed * sine(valores.getPitch);
+                colisionTime := velocidadVertical / obstacleDistance;
 
-            if colisionTime < 10 then
-                Alarm(4);
-            end if;
-
-            if colisionTime < 5 then
-                --desvio automatico COMO HACER QUE SEA 3 SEGUNDOS????
-                if getAltitude <= 8500 then
-                    setPitch(20);
-                elsif >= 8500 then
-                    setRoll(45);
-                end if; --Al terminar, estabilizar, pitch y roll := 0
-            end if; --Poner un wait until aqui? O usar obj como contador?
-
-            if obstacleDistance < 500 or getPresencia = 0 then
-                if colisionTime < 15 then
+                if colisionTime < 10 then
                     Alarm(4);
                 end if;
-                if colisionTime < 10 then
+
+                if colisionTime < 5 then
                     --desvio automatico
+                    if valores.getAltitude <= 8500 then
+                        valores.setPitch(20);
+                    elsif valores.getAltitude >= 8500 then
+                        valores.setRoll(45);
+                    end if;
+                    contador := 12;
                 end if;
 
+                if obstacleDistance < 500 or valores.getPresencia = 0 then
+                    if colisionTime < 15 then
+                        Alarm(4);
+                    elsif colisionTime < 10 then
+                        --desvio automatico
+                        if valores.getAltitude <= 8500 then
+                            valores.setPitch(20);
+                        elsif valores.getAltitude >= 8500 then
+                            valores.setRoll(45);
+                        end if;
+                        contador := 12;
+                    end if;
+                end if;
             end if;
-
-        delay until (Clock + To_time_Span(0.25);
+                
+        delay until (Clock + To_time_Span(0.25));
         end loop;
 
     end controlColision;
