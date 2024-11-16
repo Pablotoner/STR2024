@@ -46,12 +46,15 @@ package body fss is
         function getAltitude return Altitude_Samples_Type;
         procedure getObstacle(D: out Distance_Samples_Type);
         function getPresencia return PilotPresence_Samples_Type;
+        function getContador return Integer;
+        procedure setContador (C : Integer);
     private
         power : Power_Samples_Type; --cambiado a no usar variables privadas, está bien???
         speed : Speed_Samples_Type;
         pitch : Pitch_Samples_Type;
         roll : Roll_Samples_Type;
         joystick : Joystick_Samples_Type;
+        contador : integer := -1;
     end valores;
 
     protected body valores is
@@ -116,6 +119,16 @@ package body fss is
         begin
             return Read_PilotPresence;
         end getPresencia;
+
+        function getContador return integer is
+        begin
+            return contador;
+        end getContador;
+
+        procedure setContador (C : Integer) is
+        begin
+            contador := C;
+        end setContador;
         
     end valores;
     -----------------------------------------------------------------------
@@ -123,12 +136,14 @@ package body fss is
     -----------------------------------------------------------------------
 --Periodo mas pequeño -> prioridad mas alta, cambiarlas por variables
     -- Aqui se declaran las tareas que forman el STR
-    task controlVelocidad is pragma priority(1);
+    task controlVelocidad is pragma priority(7); --300
     end controlVelocidad;
-    task controlAltCabAla is pragma priority(2);
+    task controlAltCabAla is pragma priority(5); --200
     end controlAltCabAla;
-    task controlColision is pragma priority(3);
+    task controlColision is pragma priority(6); --250
     end controlColision;
+    task display is pragma priority(8); --1000
+    end display;
 
     -----------------------------------------------------------------------
     ------------- body of tasks 
@@ -136,7 +151,7 @@ package body fss is
     -- Aqui se escriben los cuerpos de las tareas 
     task body controlVelocidad  is
         currentPowerSetting : Power_Samples_Type;
-        targetSpeed : Speed_Samples_Type; --cambiar por getters directamente?
+        targetSpeed : Speed_Samples_Type;
         currentSpeed : Speed_Samples_Type;
         currentPitch : Pitch_Samples_Type;
         currentRoll : Roll_Samples_Type;
@@ -148,60 +163,52 @@ package body fss is
             Start_Activity("Tarea Velocidad");
             Read_Power(currentPowerSetting); --valor potenciometro
             targetSpeed := Speed_Samples_Type(float(currentPowerSetting) * 1.2); --velocidad objetivo
-            currentPitch := 5; --CAMBIAR
-            currentRoll := 5; --CAMBIAR
+            currentPitch := valores.getPitch; --CAMBIAR por acceso directo?
+            currentRoll := valores.getRoll;
             currentSpeed := valores.getSpeed;
             valores.getJoystick(currentJoystick);
-            
+
+            --el rincon del debug
             --Display_Message("Velocidad actual leida: ");
             --Display_Speed(currentSpeed);
-            
             --Display_Message("Power setting del piloto: ");
             --Display_Pilot_Power(currentPowerSetting);
-            
             --Display_Message("Velocidad objetivo calculada: ");
             --Display_Speed(targetSpeed);
-            
             --Display_Message("Pitch actual");
             --Display_Pitch(currentPitch);
             
-            --Display_Message("Joystick actual:");
-            --Display_Joystick(currentJoystick);
-            
             if currentSpeed > 300 and currentSpeed < 1000 then
                 Light_2(Off); --si vel correcta, apaga luz
-            end if;
-            if currentSpeed > 1000 then
+            elsif currentSpeed > 1000 then
+                Light_2(On);
+            elsif currentSpeed < 300 then
+                --Display_Message("Velocidad inferior a 300");
                 Light_2(On);
             end if;
-            if currentSpeed < 300 then
-                Display_Message("Velocidad inferior a 300");
-                Light_2(On);
-            end if;
-            if currentSpeed < 1000 then
-                Display_Message("Velocidad < 1000");
-                if currentPitch > 1 then --1 como umbral, cambiar para ser +o- sensible
+            if targetSpeed < 1000 then
+                --Display_Message("Velocidad < 1000");
+                if currentPitch > 3 then
                     targetSpeed := targetSpeed + 150;
-                    Display_Message("Y pitch positivo, acelerar 150");
+                    --Display_Message("Y pitch positivo, acelerar 150");
                 end if;
                 
-                if currentRoll > 1 then
+                if currentRoll > 3 then
                     targetSpeed := targetSpeed + 100;
-                    Display_Message("Y roll, acelerar 100");
+                    --Display_Message("Y roll, acelerar 100");
                 end if;
             end if;
             if targetSpeed < 300 then
-                Display_Message("Velocidad objetivo menos de 300, limitando a 300");
+                --Display_Message("Velocidad objetivo menos de 300, limitando a 300");
                 targetSpeed := 300;
-            end if;
-            if targetSpeed > 1000 then
-                Display_Message("Velocidad excesiva, limitando a 1000");
+            elsif targetSpeed > 1000 then
+                --Display_Message("Velocidad excesiva, limitando a 1000");
                 targetSpeed := 1000;
             end if;
-            --posible fallo al convertir entre power setting y velocidad
+            --posible fallo al convertir entre power setting y velocidad?
             valores.setSpeed(targetSpeed); --no asignar valor a targetSpeed hasta no haber tomado una decision??
             --Display_Message("Velocidad objetivo decidido");
-            Display_Speed(targetSpeed);
+            --Display_Speed(targetSpeed);
             Finish_Activity("Tarea Velocidad");
             New_Line;
             Next_Start := Next_Start + periodo;
@@ -212,7 +219,6 @@ package body fss is
     task body controlAltCabAla is
         currentAltitude : Altitude_Samples_Type;
         currentJoystick : Joystick_Samples_Type;
-        currentPitch : Pitch_Samples_Type;
         currentRoll : Roll_Samples_Type;
         targetPitch : Pitch_Samples_Type;
         targetRoll : Roll_Samples_Type;
@@ -220,55 +226,64 @@ package body fss is
         periodo : constant Time_Span :=  Milliseconds(200);
     begin
         loop
-            Start_Activity("Tarea Altitud-Posicion");
-            valores.getJoystick(currentJoystick);
-            currentAltitude := valores.getAltitude;
-            targetPitch := Pitch_Samples_Type(currentJoystick(x));
-            if currentAltitude < 2500 then
-                Light_1(On);
-                if currentAltitude < 2000 and targetPitch < 0 then
-                    targetPitch := 0;
+            Start_Activity("Tarea Altitud+Posicion");
+            if valores.getContador = -1 then
+                valores.getJoystick(currentJoystick);
+                currentAltitude := valores.getAltitude;
+                targetPitch := Pitch_Samples_Type(currentJoystick(x));
+                --Display_Joystick(currentJoystick);
+                --Display_Altitude(currentAltitude);
+                if currentAltitude < 2500 then
+                    --Display_Message("Altitud < 2500");
+                    Light_1(On);
+                    if currentAltitude < 2000 and targetPitch < 0 then
+                        targetPitch := 0;
+                        --Display_Message("Y < 2000 y pitch negativo, ignorando");
+                    end if;
+                elsif currentAltitude > 9500 then
+                    Light_1(On);
+                    --Display_Message("Alt > 9500");
+                    if currentAltitude > 10000 and targetPitch > 0 then
+                        targetPitch := 0;
+                        --Display_Message("Y > 10000 y pitch pos, ignorando");
+                    end if;
+                else
+                    Light_1(Off);
                 end if;
-            end if;
 
-            if currentAltitude > 9500 then
-                Light_1(On);
-                if currentAltitude > 10000 and targetPitch > 0 then
+                if targetPitch > 30 then
+                    targetPitch := 30;
+                    --Display_Message("pitch > 30, limitando");
+                elsif targetPitch < -30 then
+                    targetPitch := -30;
+                    --Display_Message("pitch < -30, limitando");
+                elsif targetPitch > -3 and targetPitch < 3 then
                     targetPitch := 0;
+                    --Display_Message("Pitch en zona muerta");
                 end if;
-            end if;
+                --Display_Message("Pitch decidido");
+                valores.setPitch(targetPitch);
+                --Display_Pitch(targetPitch);
 
-            if currentPitch > 30 then
-                targetPitch := 30;
-            end if;
+                
+                targetRoll := Roll_Samples_Type(currentJoystick(y));
 
-            if currentPitch < -30 then
-                targetPitch := -30;
-            end if;
-
-            if currentPitch > -3 and currentPitch < 3 then
-                targetPitch := 0;
-            end if;
-
-            valores.setPitch(targetPitch);
-
-            
-            targetRoll := Roll_Samples_Type(currentJoystick(y));
-
-            if targetRoll > 35 or targetRoll < -35 then
-                --Display_Message("Alabeo excesivo!"); CAMBIAR A TAREA DISPLAY
-
+                
                 if targetRoll > 45 then --"No se transferirán a la aeronave" limitar o 0???
                     targetRoll := 45;
-                end if;
-
-                if targetRoll < -45 then
+                elsif targetRoll < -45 then
                     targetRoll := -45;
                 end if;
-            end if;
+                if targetRoll < 3 and targetRoll > -3 then
+                        targetRoll := 0;
+                end if;
 
-            valores.setRoll(targetRoll);
-            Finish_Activity("Tarea Altitud-Posicion");
+                valores.setRoll(targetRoll);
+                --Display_Message("Roll decidido");
+                --Display_Roll(targetRoll);
+            end if;
+            Finish_Activity("Tarea Altitud+Posicion");
+            New_Line;
             Next_Start := Next_Start + periodo;
             delay until Next_Start;
         end loop;
@@ -276,60 +291,122 @@ package body fss is
 
     --Vvertical = Va * sen(pitch)
     task body controlColision is
-        contador : integer;
         obstacleDistance : Distance_Samples_Type;
-        velocidadVertical : Speed_Samples_Type;
-        colisionTime : integer := -1;
+        velocidadVertical : float;
+        colisionTime : float := 0.0;
         Next_Start : Ada.Real_Time.Time := Clock;
         periodo : constant Time_Span :=  Milliseconds(250);
+        currentSpeed : Speed_Samples_Type;
+        currentPitch : Pitch_Samples_Type;
     begin
         loop
             Start_Activity("Tarea Colision");
-            if contador > 0 then
-                contador := contador -1;
-            elsif contador = 0 then 
+            New_Line;
+            if valores.getContador > 0 then
+                Display_Message("Desvio auto. en curso: ");
+                Print_an_Integer(valores.getContador);
+                valores.setContador(valores.getContador -1);
+            elsif valores.getContador = 0 then 
                 valores.setPitch(0);
                 valores.setRoll(0);
-                contador := -1;
+                Display_Message("Desvio auto. finalizado");
+                valores.setContador(-1);
             else
+                currentSpeed := valores.getSpeed;
+                currentPitch := valores.getPitch;
                 valores.getObstacle(obstacleDistance); --o usar la del devices direct?
-                velocidadVertical := Speed_Samples_Type(float(valores.getSpeed) * Sin(float(valores.getPitch)));
-                colisionTime := Integer(velocidadVertical) / Integer(obstacleDistance);
-
-                if colisionTime < 10 then
+                --Display_Message("temita velocidad?");
+                --Display_Speed(currentSpeed);
+                --Display_Pitch(currentPitch);
+                velocidadVertical := float(currentSpeed) * Sin(float(currentPitch), 360.0);
+                --Display_Message("Vel. vertical calculada:");
+                --Print_a_Float(velocidadVertical);
+                colisionTime := float(obstacleDistance) / velocidadVertical;
+                --Display_Message("Tiempo para colision:");
+                --Print_A_Float(colisionTime);
+                if colisionTime < 10.0 then
                     Alarm(4);
-                end if;
-
-                if colisionTime < 5 then
-                    --desvio automatico
-                    if valores.getAltitude <= 8500 then
-                        valores.setPitch(20);
-                    elsif valores.getAltitude >= 8500 then
-                        valores.setRoll(45);
-                    end if;
-                    contador := 12;
-                end if;
-
-                if obstacleDistance < 500 or valores.getPresencia = 0 then
-                    if colisionTime < 15 then
-                        Alarm(4);
-                    elsif colisionTime < 10 then
+                    if colisionTime < 5.0 then
                         --desvio automatico
+                        Display_Message("Desivio automatico");
                         if valores.getAltitude <= 8500 then
                             valores.setPitch(20);
                         elsif valores.getAltitude >= 8500 then
                             valores.setRoll(45);
                         end if;
-                        contador := 12;
+                        valores.setContador(12);
                     end if;
                 end if;
-            end if;
+
+                if Read_Altitude < 500 or valores.getPresencia = 0 then
+                    if colisionTime < 15.0 then
+                        Alarm(4);
+                        if colisionTime < 10.0 then
+                            --desvio automatico
+                            Display_Message("Desvio automatico");
+                            if valores.getAltitude <= 8500 then
+                                valores.setPitch(20);
+                            elsif valores.getAltitude >= 8500 then
+                                valores.setRoll(45);
+                            end if;
+                            valores.setContador(12);
+                        end if;
+                    end if;
+                end if;
+            end if; --de comprobacion de contador
             Finish_Activity("Tarea Colision");
+            New_Line;
             Next_Start := Next_Start + periodo;
             delay until Next_Start;
         end loop;
 
     end controlColision;
+
+    task body display is
+        currentAltitude : Altitude_Samples_Type;
+        currentPower : Power_Samples_Type;
+        currentSpeed : Speed_Samples_Type;
+        currentJoystick : Joystick_Samples_Type;
+        currentRoll : Roll_Samples_Type;
+        currentPitch : Pitch_Samples_Type;
+        Next_Start : Ada.Real_Time.Time := Clock;
+        periodo : constant Time_Span :=  Milliseconds(1000);
+    begin
+        loop
+            Start_Activity("Tarea Display");
+            currentAltitude := valores.getAltitude;
+            valores.getPowerSetting(currentPower);
+            currentSpeed := valores.getSpeed;
+            valores.getJoystick(currentJoystick);
+            currentRoll := valores.getRoll;
+            currentPitch := valores.getPitch;
+            
+            Display_Message("Altitud actual: ");
+            Display_Altitude(currentAltitude);
+            
+            Display_Message("Potencia de los motores: ");
+            Display_Pilot_Power(currentPower);
+            
+            Display_Message("Velocidad transferida de los motores (Km/h): ");
+            Display_Speed(currentSpeed);
+            
+            Display_Message("Posicion del joystick: ");
+            Display_Joystick(currentJoystick);
+
+            Display_Message("Cabeceo y alabeo:");
+            Display_Pitch(currentPitch);
+            Display_Roll(currentRoll);
+            if currentRoll > 35 or currentRoll < -35 then
+                Display_Message("Alabeo excesivo!");
+            end if;
+            
+            
+            Finish_Activity("Tarea Display");
+            New_Line;
+            Next_Start := Next_Start + periodo;
+            delay until Next_Start;
+        end loop;
+    end display;
     ----------------------------------------------------------------------
     ------------- procedimientos para probar los dispositivos 
     ------------- SE DEBERÁN QUITAR PARA EL PROYECTO
