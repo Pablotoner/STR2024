@@ -2,6 +2,7 @@
 with Kernel.Serial_Output; use Kernel.Serial_Output;
 with Ada.Real_Time; use Ada.Real_Time;
 with System; use System;
+with Ada.Numerics.Elementary_Functions; use Ada.Numerics.Elementary_Functions;
 
 with Tools; use Tools;
 with devicesFSS_V1; use devicesFSS_V1;
@@ -43,7 +44,7 @@ package body fss is
         procedure getJoystick (J: out Joystick_Samples_Type);
         procedure setJoystick(nuevoValor : Joystick_Samples_Type);
         function getAltitude return Altitude_Samples_Type;
-        function getObstacle return Distance_Samples_Type;
+        procedure getObstacle(D: out Distance_Samples_Type);
         function getPresencia return PilotPresence_Samples_Type;
     private
         power : Power_Samples_Type; --cambiado a no usar variables privadas, está bien???
@@ -106,9 +107,9 @@ package body fss is
             return Read_Altitude;
         end getAltitude;
 
-        function getObstacle return Distance_Samples_Type is
+        procedure getObstacle(D: out Distance_Samples_Type) is
         begin
-            return Read_Distance;
+            Read_Distance(D);
         end getObstacle;
 
         function getPresencia return PilotPresence_Samples_Type is
@@ -140,7 +141,8 @@ package body fss is
         currentPitch : Pitch_Samples_Type;
         currentRoll : Roll_Samples_Type;
         currentJoystick : Joystick_Samples_Type;
-        inicio : Ada.Real_Time.Time;
+        Next_Start : Ada.Real_Time.Time := Clock;
+        periodo : constant Time_Span :=  Milliseconds(300);
     begin
         loop
             Start_Activity("Tarea Velocidad");
@@ -151,20 +153,20 @@ package body fss is
             currentSpeed := valores.getSpeed;
             valores.getJoystick(currentJoystick);
             
-            Display_Message("Velocidad actual leida: ");
-            Display_Speed(currentSpeed);
+            --Display_Message("Velocidad actual leida: ");
+            --Display_Speed(currentSpeed);
             
-            Display_Message("Power setting del piloto: ");
-            Display_Pilot_Power(currentPowerSetting);
+            --Display_Message("Power setting del piloto: ");
+            --Display_Pilot_Power(currentPowerSetting);
             
-            Display_Message("Velocidad objetivo calculada: ");
-            Display_Speed(targetSpeed);
+            --Display_Message("Velocidad objetivo calculada: ");
+            --Display_Speed(targetSpeed);
             
-            Display_Message("Pitch actual");
-            Display_Pitch(currentPitch);
+            --Display_Message("Pitch actual");
+            --Display_Pitch(currentPitch);
             
-            Display_Message("Joystick actual:");
-            Display_Joystick(currentJoystick);
+            --Display_Message("Joystick actual:");
+            --Display_Joystick(currentJoystick);
             
             if currentSpeed > 300 and currentSpeed < 1000 then
                 Light_2(Off); --si vel correcta, apaga luz
@@ -198,11 +200,12 @@ package body fss is
             end if;
             --posible fallo al convertir entre power setting y velocidad
             valores.setSpeed(targetSpeed); --no asignar valor a targetSpeed hasta no haber tomado una decision??
-            Display_Message("Velocidad objetivo decidido");
+            --Display_Message("Velocidad objetivo decidido");
             Display_Speed(targetSpeed);
             Finish_Activity("Tarea Velocidad");
             New_Line;
-        delay until (Clock + To_time_Span(0.3));
+            Next_Start := Next_Start + periodo;
+            delay until Next_Start;
         end loop;
     end controlVelocidad;
 
@@ -213,11 +216,14 @@ package body fss is
         currentRoll : Roll_Samples_Type;
         targetPitch : Pitch_Samples_Type;
         targetRoll : Roll_Samples_Type;
+        Next_Start : Ada.Real_Time.Time := Clock;
+        periodo : constant Time_Span :=  Milliseconds(200);
     begin
         loop
+            Start_Activity("Tarea Altitud-Posicion");
             valores.getJoystick(currentJoystick);
             currentAltitude := valores.getAltitude;
-            targetPitch := currentJoystick(x);
+            targetPitch := Pitch_Samples_Type(currentJoystick(x));
             if currentAltitude < 2500 then
                 Light_1(On);
                 if currentAltitude < 2000 and targetPitch < 0 then
@@ -247,10 +253,10 @@ package body fss is
             valores.setPitch(targetPitch);
 
             
-            targetRoll := currentJoystick(y);
+            targetRoll := Roll_Samples_Type(currentJoystick(y));
 
             if targetRoll > 35 or targetRoll < -35 then
-                Display_Message("Cabeceo excesivo!");
+                --Display_Message("Alabeo excesivo!"); CAMBIAR A TAREA DISPLAY
 
                 if targetRoll > 45 then --"No se transferirán a la aeronave" limitar o 0???
                     targetRoll := 45;
@@ -262,7 +268,9 @@ package body fss is
             end if;
 
             valores.setRoll(targetRoll);
-            delay until (Clock + To_time_Span(0.2));
+            Finish_Activity("Tarea Altitud-Posicion");
+            Next_Start := Next_Start + periodo;
+            delay until Next_Start;
         end loop;
     end controlAltCabAla;
 
@@ -272,8 +280,11 @@ package body fss is
         obstacleDistance : Distance_Samples_Type;
         velocidadVertical : Speed_Samples_Type;
         colisionTime : integer := -1;
+        Next_Start : Ada.Real_Time.Time := Clock;
+        periodo : constant Time_Span :=  Milliseconds(250);
     begin
         loop
+            Start_Activity("Tarea Colision");
             if contador > 0 then
                 contador := contador -1;
             elsif contador = 0 then 
@@ -281,9 +292,9 @@ package body fss is
                 valores.setRoll(0);
                 contador := -1;
             else
-                obstacleDistance := valores.getObstacle; --o usar la del devices direct?
-                velocidadVertical := valores.getSpeed * sine(valores.getPitch);
-                colisionTime := velocidadVertical / obstacleDistance;
+                valores.getObstacle(obstacleDistance); --o usar la del devices direct?
+                velocidadVertical := Speed_Samples_Type(float(valores.getSpeed) * Sin(float(valores.getPitch)));
+                colisionTime := Integer(velocidadVertical) / Integer(obstacleDistance);
 
                 if colisionTime < 10 then
                     Alarm(4);
@@ -313,8 +324,9 @@ package body fss is
                     end if;
                 end if;
             end if;
-                
-        delay until (Clock + To_time_Span(0.25));
+            Finish_Activity("Tarea Colision");
+            Next_Start := Next_Start + periodo;
+            delay until Next_Start;
         end loop;
 
     end controlColision;
