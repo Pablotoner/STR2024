@@ -2,7 +2,7 @@
 with Ada.Real_Time; use Ada.Real_Time;
 with devicesfss_v1; use devicesfss_v1;
 
-package escenario1 is
+package escenario3 is
 
     ---------------------------------------------------------------------
     ------ Access time for devices
@@ -241,4 +241,4 @@ package escenario1 is
                    0,0,0,0,0, 0,0,0,0,0,   -- 18s. 
                    0,0,0,0,0, 0,0,0,0,0,   -- 19s.
                    0,0,0,0,0, 0,0,0,0,0);  -- 20s.
-end escenario1;
+end escenario3;

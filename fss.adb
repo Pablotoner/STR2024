@@ -319,6 +319,8 @@ package body fss is
             else
                 currentSpeed := valores.getSpeed;
                 currentPitch := valores.getPitch;
+                currentLight := Light_Samples_Type;
+                Read_Light_Intensity(currentLight);
                 valores.getObstacle(obstacleDistance); --o usar la del devices direct?
                 --Display_Message("temita velocidad?");
                 --Display_Speed(currentSpeed);
@@ -343,7 +345,7 @@ package body fss is
                     end if;
                 end if;
 
-                if Read_Altitude < 500 or valores.getPresencia = 0 then
+                if currentLight < 500 or valores.getPresencia = 0 then
                     if colisionTime < 15.0 then
                         Alarm(4);
                         if colisionTime < 10.0 then

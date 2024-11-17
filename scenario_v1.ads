@@ -61,35 +61,6 @@ package Scenario_V1 is
     ---------------------------------------------------------------------
     ------ LIGHT OK------------------------------------------------------
 
-    cantidad_datos_Pitch: constant := 200;
-    type Indice_Secuencia_Pitch is mod cantidad_datos_Pitch;
-    type tipo_Secuencia_Pitch is array (Indice_Secuencia_Pitch) of Pitch_Samples_Type;
-
-    Pitch_Simulation: tipo_Secuencia_Pitch :=  -- 1 muestra cada 100ms.
-                 ( 1,1,1,1,1, 1,1,1,1,1,   -- 1s.
-                   7,7,7,7,7, 7,7,7,7,7,   -- 2s.
-                   1,1,1,1,1, 1,1,1,1,1,   -- 3s.
-                   7,7,7,7,7, 7,7,7,7,7,   -- 4s.
-                   1,1,1,1,1, 1,1,1,1,1,   -- 5s.
-                   7,7,7,7,7, 7,7,7,7,7,   -- 6s.
-                   1,1,1,1,1, 1,1,1,1,1,   -- 7s.
-                   7,7,7,7,7, 7,7,7,7,7,   -- 8s.
-                   1,1,1,1,1, 1,1,1,1,1,   -- 9s.
-                   7,7,7,7,7, 7,7,7,7,7,   -- 10s.
-                   1,1,1,1,1, 1,1,1,1,1,   -- 11s.
-                   7,7,7,7,7, 7,7,7,7,7,   -- 12s.
-                   1,1,1,1,1, 1,1,1,1,1,   -- 13s.
-                   7,7,7,7,7, 7,7,7,7,7,   -- 14s.
-                   1,1,1,1,1, 1,1,1,1,1,   -- 15s.
-                   7,7,7,7,7, 7,7,7,7,7,   -- 16s.
-                   1,1,1,1,1, 1,1,1,1,1,   -- 17s.
-                   7,7,7,7,7, 7,7,7,7,7,   -- 18s.
-                   1,1,1,1,1, 1,1,1,1,1,   -- 19s.
-                   7,7,7,7,7, 7,7,7,7,7);  -- 20s.
-    
----------------------------------------------------------------------
-    ------ PITCH OK------------------------------------------------------
-
     cantidad_datos_Light: constant := 200;
     type Indice_Secuencia_Light is mod cantidad_datos_Light;
     type tipo_Secuencia_Light is array (Indice_Secuencia_Light) of Light_Samples_Type;
