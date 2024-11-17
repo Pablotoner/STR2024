@@ -1,85 +1,244 @@
---Probar la reacción del sistema ante movimientos extremos en pitch y joystick.--
---Validar la respuesta del sistema frente a la pérdida intermitente del piloto.--
---Verificar la gestión de la potencia del motor y su impacto en la velocidad y estabilidad.--
---Comprobar cómo el sistema maneja la detección de un obstáculo crítico (distancia cercana a 300).--
---Evaluar el comportamiento del FSS ante cambios de luz extremos.--
-
-
 
 with Ada.Real_Time; use Ada.Real_Time;
 with devicesfss_v1; use devicesfss_v1;
 
-package Scenario_V3 is
+package escenario1 is
 
+    ---------------------------------------------------------------------
+    ------ Access time for devices
+    ---------------------------------------------------------------------
     WCET_Distance: constant Ada.Real_Time.Time_Span := Ada.Real_Time.Milliseconds(5);
     WCET_Light: constant Ada.Real_Time.Time_Span := Ada.Real_Time.Milliseconds(5);
+    
     WCET_Joystick: constant Ada.Real_Time.Time_Span := Ada.Real_Time.Milliseconds(5);
     WCET_PilotPresence: constant Ada.Real_Time.Time_Span := Ada.Real_Time.Milliseconds(5);
     WCET_PilotButton: constant Ada.Real_Time.Time_Span := Ada.Real_Time.Milliseconds(5);
+    
     WCET_Power: constant Ada.Real_Time.Time_Span := Ada.Real_Time.Milliseconds(4);
+    
     WCET_Speed: constant Ada.Real_Time.Time_Span := Ada.Real_Time.Milliseconds(7);
     WCET_Altitude: constant Ada.Real_Time.Time_Span := Ada.Real_Time.Milliseconds(18);
+
     WCET_Pitch: constant Ada.Real_Time.Time_Span := Ada.Real_Time.Milliseconds(20);
     WCET_Roll: constant Ada.Real_Time.Time_Span := Ada.Real_Time.Milliseconds(18);
+
     WCET_Display: constant Ada.Real_Time.Time_Span := Ada.Real_Time.Milliseconds(15);
     WCET_Alarm: constant Ada.Real_Time.Time_Span := Ada.Real_Time.Milliseconds(5);
 
-    cantidad_datos_Pitch: constant := 200;
-    type Indice_Secuencia_Pitch is mod cantidad_datos_Pitch;
-    type tipo_Secuencia_Pitch is array (Indice_Secuencia_Pitch) of Pitch_Samples_Type;
+    ---------------------------------------------------------------------
+    ------ SCENARIO ----------------------------------------------------- 
+    ---------------------------------------------------------------------
+    -- Initial_Altitude: Altitude_Samples_Type := 8000;
+    
+    ---------------------------------------------------------------------
+    ------ DISTANCE OK---------------------------------------------------
+    cantidad_datos_Distancia: constant := 200;
+    type Indice_Secuencia_Distancia is mod cantidad_datos_Distancia;
+    type tipo_Secuencia_Distancia is array (Indice_Secuencia_Distancia) of Distance_Samples_Type;
 
-    Pitch_Simulation: tipo_Secuencia_Pitch :=
-                 ( 30,25,20,15,10, 5,0,-5,-10,-15,
-                   -30,-40,-50,-50,-40,-30,-15,0,15,30,
-                   40,50,50,45,40,35,30,25,20,15);
+    Distance_Simulation: tipo_Secuencia_Distancia :=  -- next sample every 100ms.
+            ( 5555,5555,5555,5555,5555, 5555,5555,5555,5555,5555,   -- 1s. 5550=30s
+              3000,3000,3000,3000,3000, 3000,3000,3000,3000,3000,   -- 2s. 4000=21s
+              2500,2500,2500,2500,2500, 2500,2500,2500,2500,2500,   -- 3s. 3000=16s alarma
+              2000,2000,2000,2000,2000, 500,500,500,500,500, -- 4s. 2000=10s desvio
+              5555,5555,5555,5555,5555, 5555,5555,5555,5555,5555,   -- 5s. 1000=5s desviando
+              5555,5555,5555,5555,5555, 5555,5555,5555,5555,5555,   -- 6s.			desviando
+              5555,5555,5555,5555,5555, 5555,5555,5555,5555,5555,   -- 7s.
+              5555,5555,5555,5555,5555, 5555,5555,5555,5555,5555,   -- 8s.
+              5555,5555,5555,5555,5555, 5555,5555,5555,5555,5555,   -- 9s.
+              2000,2000,2000,2000,2000, 2000,2000,2000,2000,2000,   -- 10s. desvio por presencia
+              2000,2000,2000,2000,2000, 2000,2000,2000,2000,2000,   -- 11s.desviando
+              5555,5555,5555,5555,5555, 5555,5555,5555,5555,5555,   -- 12s.desviando
+              5555,5555,5555,5555,5555, 5555,5555,5555,5555,5555,   -- 13s.desviando
+              5555,5555,5555,5555,5555, 5555,5555,5555,5555,5555,   -- 14s.
+              2000,2000,2000,2000,2000, 2000,2000,2000,2000,2000,   -- 15s. por luz
+              2000,2000,2000,2000,2000, 2000,2000,2000,2000,2000,   -- 16s.
+              500,500,500,500,500, 500,500,500,500,500,   -- 17s.
+              500,500,500,500,500, 500,500,500,500,500,   -- 18s.
+              500,500,500,500,500, 500,500,500,500,500,   -- 19s.
+              5555,5555,5555,5555,5555, 5555,5555,5555,5555,5555);  -- 20s.
+                   
+    
+---------------------------------------------------------------------
+    ------ LIGHT OK------------------------------------------------------
 
     cantidad_datos_Light: constant := 200;
     type Indice_Secuencia_Light is mod cantidad_datos_Light;
     type tipo_Secuencia_Light is array (Indice_Secuencia_Light) of Light_Samples_Type;
 
-    Light_Intensity_Simulation: tipo_Secuencia_Light :=
-                 ( 100,200,300,400,500, 600,700,800,900,1000,
-                   1000,1000,800,600,400, 300,200,100,50,0);
+    Light_Intensity_Simulation: tipo_Secuencia_Light :=  -- 1 muestra cada 100ms.
+                 ( 700,700,700,700,700, 700,700,700,700,700,   -- 1s.
+                   700,700,700,700,700, 700,700,700,700,700,   -- 2s.
+                   700,700,700,700,700, 700,700,700,700,700,   -- 3s.
+                   700,700,700,700,700, 700,700,700,700,700,   -- 4s. dia
+                   700,700,700,700,700, 700,700,700,700,700,   -- 5s.
+                   700,700,700,700,700, 700,700,700,700,700,   -- 6s.
+                   700,700,700,700,700, 700,700,700,700,700,   -- 7s.
+                   700,700,700,700,700, 700,700,700,700,700,   -- 8s.
+                   700,700,700,700,700, 700,700,700,700,700,   -- 9s.
+                   200,200,200,200,200, 200,200,200,200,200,   -- 10s.
+                   200,200,200,200,200, 200,200,200,200,200,   -- 11s.
+                   200,200,200,200,200, 200,200,200,200,200,   -- 12s.
+                   200,200,200,200,200, 200,200,200,200,200,   -- 13s. noche
+                   200,200,200,200,200, 200,200,200,200,200,   -- 14s.
+                   200,200,200,200,200, 200,200,200,200,200,   -- 15s.
+                   200,200,200,200,200, 200,200,200,200,200,   -- 16s.
+                   200,200,200,200,200, 200,200,200,200,200,   -- 17s.
+                   200,200,200,200,200, 200,200,200,200,200,   -- 18s.
+                   200,200,200,200,200, 200,200,200,200,200,   -- 19s.
+                   200,200,200,200,200, 200,200,200,200,200);  -- 20s.
+    ---------------------------------------------------------------------
+    ------ JOYSTICK OK---------------------------------------------------
 
+    cantidad_datos_Joystick: constant := 200;
+    type Indice_Secuencia_Joystick is mod cantidad_datos_Joystick;
+    type tipo_Secuencia_Joystick is array (Indice_Secuencia_Joystick) 
+                                             of Joystick_Samples_Type;
+
+    Joystick_Simulation: tipo_Secuencia_Joystick :=  -- 1 muestra cada 100ms.
+                ((-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  --1s. Descenso constante
+ 
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  --2s.
+
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  --3s.
+
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  --4s. 
+
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  --5s.  
+                  
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  --6s.  
+ 
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  --7s. 
+
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  --8s.  
+
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  --9s. 
+
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03), --10s. 
+                 
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  --11s. Descenso constante
+ 
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  --12s.
+
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  --13s.
+
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  --14s. 
+
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  --15s.  
+                  
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  --16s.  
+ 
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  --17s. 
+
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  --18s.  
+
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  --19s. 
+
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03),  
+                 (-10,+03),(-10,+03),(-10,+03),(-10,+03),(-10,+03)) --20. 
+                 
+    ---------------------------------------------------------------------
+    ------ POWER OK------------------------------------------------------
     cantidad_datos_Power: constant := 200;
     type Indice_Secuencia_Power is mod cantidad_datos_Power;
     type tipo_Secuencia_Power is array (Indice_Secuencia_Power) of Power_Samples_Type;
 
-    Power_Simulation: tipo_Secuencia_Power :=
-                 ( 1000,1000,900,800,700, 600,500,400,300,200,
-                   150,150,300,500,700, 900,1000,1000,1000,800);
+    Power_Simulation: tipo_Secuencia_Power :=  -- next sample every 100ms.
+                 ( 900,900,900,900,900, 900,900,900,900,900,   -- 1s.  potencia constante tambien
+                   900,900,900,900,900, 900,900,900,900,900,   -- 2s.  para provocar colisiones
+                   900,900,900,900,900, 900,900,900,900,900,   -- 3s.  variando solo distancia
+                   900,900,900,900,900, 900,900,900,900,900,   -- 4s.  187 vel de bajada aprox
+                   900,900,900,900,900, 900,900,900,900,900,   -- 5s.
+                   900,900,900,900,900, 900,900,900,900,900,   -- 6s.   
+                   900,900,900,900,900, 900,900,900,900,900,   -- 7s. 
+                   900,900,900,900,900, 900,900,900,900,900,   -- 8s.
+                   900,900,900,900,900, 900,900,900,900,900,   -- 9s.
+                   900,900,900,900,900, 900,900,900,900,900,   -- 10s.
+                   900,900,900,900,900, 900,900,900,900,900,   -- 11s.
+                   900,900,900,900,900, 900,900,900,900,900,   -- 12s.
+                   900,900,900,900,900, 900,900,900,900,900,   -- 13s. 
+                   900,900,900,900,900, 900,900,900,900,900,   -- 14s.
+                   900,900,900,900,900, 900,900,900,900,900,   -- 15s.
+                   900,900,900,900,900, 900,900,900,900,900,   -- 16s. 
+                   900,900,900,900,900, 900,900,900,900,900,   -- 17s.
+                   900,900,900,900,900, 900,900,900,900,900,   -- 18s.
+                   900,900,900,900,900, 900,900,900,900,900,   -- 19s.  
+                   900,900,900,900,900, 900,900,900,900,900,); -- 20s.
 
-    cantidad_datos_Distancia: constant := 200;
-    type Indice_Secuencia_Distancia is mod cantidad_datos_Distancia;
-    type tipo_Secuencia_Distancia is array (Indice_Secuencia_Distancia) of Distance_Samples_Type;
 
-    Distance_Simulation: tipo_Secuencia_Distancia :=
-                 ( 5000,4000,3000,2000,1000, 500,400,300,200,100,
-                   100,200,300,400,500, 1000,2000,3000,4000,5000);
-
-    cantidad_datos_Joystick: constant := 200;
-    type Indice_Secuencia_Joystick is mod cantidad_datos_Joystick;
-    type tipo_Secuencia_Joystick is array (Indice_Secuencia_Joystick) of Joystick_Samples_Type;
-
-    Joystick_Simulation: tipo_Secuencia_Joystick :=
-                 ((+50,+50),(+40,+40),(+30,+30),(+20,+20),(+10,+10),
-                  (0,0),(-10,-10),(-20,-20),(-30,-30),(-40,-40),
-                  (+45,+45),(+45,-45),(-45,+45),(-45,-45),(0,0));
+    ---------------------------------------------------------------------
+    ------ PILOT'S PRESENCE ---------------------------------------------
 
     cantidad_datos_PilotPresence: constant := 200;
     type Indice_Secuencia_PilotPresence is mod cantidad_datos_PilotPresence;
     type tipo_Secuencia_PilotPresence is array (Indice_Secuencia_PilotPresence) of PilotPresence_Samples_Type;
 
-    PilotPresence_Simulation: tipo_Secuencia_PilotPresence :=
-                 ( 1,1,1,1,0, 0,1,1,0,0,
-                   1,1,1,1,1, 0,0,0,1,1);
+    PilotPresence_Simulation: tipo_Secuencia_PilotPresence :=  -- 1 muestra cada 100ms.
+                 ( 1,1,1,1,1, 1,1,1,1,1,   -- 1s. 	primero esta
+                   1,1,1,1,1, 1,1,1,1,1,   -- 2s.
+                   1,1,1,1,1, 1,1,1,1,1,   -- 3s.
+                   1,1,1,1,1, 1,1,1,1,1,   -- 4s. 
+                   1,1,1,1,1, 1,1,1,1,1,   -- 5s.
+                   1,1,1,1,1, 1,1,1,1,1,   -- 6s.
+                   1,1,1,1,1, 1,1,1,1,1,   -- 7s.
+                   1,1,1,1,1, 1,1,1,1,1,   -- 8s. 
+                   1,1,1,1,1, 1,1,1,1,1,   -- 9s.
+                   1,1,1,1,1, 1,1,1,1,1,   -- 10s.
+                   1,1,1,1,1, 1,1,1,1,1,   -- 11s. 
+                   1,1,1,1,1, 1,1,1,1,1,   -- 12s.
+                   1,1,1,1,1, 1,1,1,1,1,   -- 13s.
+                   1,1,1,1,1, 1,1,1,1,1,   -- 14s. luego no
+                   0,0,0,0,0, 0,0,0,0,0,   -- 15s.
+                   0,0,0,0,0, 0,0,0,0,0,   -- 16s.
+                   0,0,0,0,0, 0,0,0,0,0,   -- 17s.
+                   0,0,0,0,0, 0,0,0,0,0,   -- 18s. 
+                   0,0,0,0,0, 0,0,0,0,0,   -- 19s.
+                   0,0,0,0,0, 0,0,0,0,0);  -- 20s.                   
+    ---------------------------------------------------------------------
+    ------ PILOT'S BUTTON -----------------------------------------------
 
     cantidad_datos_PilotButton: constant := 200;
     type Indice_Secuencia_PilotButton is mod cantidad_datos_PilotButton;
     type tipo_Secuencia_PilotButton is array (Indice_Secuencia_PilotButton) of PilotButton_Samples_Type;
 
-    PilotButton_Simulation: tipo_Secuencia_PilotButton :=
-                 ( 0,0,1,0,0, 0,1,0,1,0,
-                   0,0,0,0,1, 1,0,0,0,1);
-
-end Scenario_V3;
+    PilotButton_Simulation: tipo_Secuencia_PilotButton :=  -- 1 muestra cada 100ms.
+                 ( 0,0,0,0,0, 0,0,0,0,0,   -- 1s. 
+                   0,0,0,0,0, 1,1,1,0,0,   -- 2s.
+                   0,0,0,0,0, 0,0,0,0,0,   -- 3s.
+                   0,0,0,0,0, 0,0,0,0,0,   -- 4s. 
+                   1,1,1,1,0, 0,0,0,0,0,   -- 5s.
+                   0,0,0,0,0, 0,0,0,0,0,   -- 6s.
+                   0,0,0,0,0, 0,0,0,0,0,   -- 7s.
+                   0,0,0,0,0, 0,0,0,0,0,   -- 8s. 
+                   0,0,0,0,0, 0,0,0,0,0,   -- 9s.
+                   0,0,0,0,0, 0,0,0,0,0,  -- 10s.                   
+                   0,0,0,0,0, 0,0,0,0,0,   -- 11s. 
+                   0,0,0,0,0, 1,1,1,1,1,   -- 12s.
+                   0,0,0,0,0, 0,0,0,0,0,   -- 13s.
+                   0,0,0,0,0, 0,0,0,0,0,   -- 14s. 
+                   0,0,0,0,0, 0,0,0,0,0,   -- 15s.
+                   0,0,0,0,0, 0,0,0,0,0,   -- 16s.
+                   0,0,0,0,0, 0,0,0,0,0,   -- 17s.
+                   0,0,0,0,0, 0,0,0,0,0,   -- 18s. 
+                   0,0,0,0,0, 0,0,0,0,0,   -- 19s.
+                   0,0,0,0,0, 0,0,0,0,0);  -- 20s.
+end escenario1;
