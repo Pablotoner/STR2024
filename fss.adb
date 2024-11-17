@@ -136,13 +136,18 @@ package body fss is
     -----------------------------------------------------------------------
 --Periodo mas pequeño -> prioridad mas alta, cambiarlas por variables
     -- Aqui se declaran las tareas que forman el STR
-    task controlVelocidad is pragma priority(7); --300
+
+    priAltCabAla : constant Integer := 4;
+    priColision : constant Integer := 3;
+    priVelocidad : constant Integer := 2;
+    priDisplay : constant Integer := 1;
+    task controlVelocidad is pragma priority(priVelocidad); --300
     end controlVelocidad;
-    task controlAltCabAla is pragma priority(5); --200
+    task controlAltCabAla is pragma priority(priAltCabAla); --200
     end controlAltCabAla;
-    task controlColision is pragma priority(6); --250
+    task controlColision is pragma priority(priColision); --250
     end controlColision;
-    task display is pragma priority(8); --1000
+    task display is pragma priority(priDisplay); --1000
     end display;
 
     -----------------------------------------------------------------------
