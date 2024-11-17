@@ -1,0 +1,1278 @@
+
+ TSIM/ERC32 - remote SPARC simulator, version 1.0.10 (evaluation version)
+
+ Copyright (C) 2001, Gaisler Research - all rights reserved.
+ For latest updates, go to http://www.gaisler.com/
+ Comments or bug-reports to tsim@gaisler.com
+
+libreadline.so.3: cannot open shared object file: No such file or directory
+serial port A on stdin/stdout
+allocated 4096 K RAM memory
+allocated 2048 K ROM memory
+section: .text at 0x2000000, size 210720 bytes
+section: .data at 0x2033720, size 12308 bytes
+tsim> resuming at 0x02000000
+
+[ 0.0036] >>> Tarea Altitud+Posicion
+[ 0.0290] %L(1): off
+[ 0.0578] --- Tarea Altitud+Posicion
+
+[ 0.0772] >>> Tarea Colision
+
+[ 0.1094] --- Tarea Colision
+
+[ 0.1248] >>> Tarea Velocidad
+[ 0.1568] %Light(2): ON
+[ 0.1719] --- Tarea Velocidad
+
+[ 0.1878] >>> Tarea Display
+[ 0.2071] >>> Tarea Altitud+Posicion
+[ 0.2325] %L(1): off
+[ 0.2613] --- Tarea Altitud+Posicion
+
+[ 0.2976] ..# MSSG: Altitud actual: 
+[ 0.3204] ..#
+[ 0.3275] >>> Tarea Colision
+
+[ 0.3598] --- Tarea Colision
+ Altitude:  8060
+[ 0.3872] ..# MSSG: Potencia de 
+[ 0.4040] >>> Tarea Altitud+Posicion
+[ 0.4297] %L(1): off
+[ 0.4585] --- Tarea Altitud+Posicion
+
+[ 0.4779] >>> Tarea Velocidad
+[ 0.5122] --- Tarea Velocidad
+los motores: 
+[ 0.5386] ..# Pilot_Power:  800
+[ 0.5589] ..# MSSG: Velocidad trans
+[ 0.5773] >>> Tarea Colision
+
+[ 0.6081] >>> Tarea Altitud+Posicion
+[ 0.6335] %L(1): off
+[ 0.6567] --- Tarea Altitud+Posicion
+
+[ 0.6770] --- Tarea Colision
+ferida de los motores (Km/h): 
+[ 0.7116] ..# Speed:  100
+[ 0.7249] >>> Tarea Velocidad
+[ 0.7592] --- Tarea Velocidad
+0
+[ 0.7795] ..# MSSG: Posicion del joystick: 
+[ 0.8038] >>> Tarea Altitud+Posicion
+[ 0.8293] %L(1): off
+[ 0.8525] --- Tarea Altitud+Posicion
+
+[ 0.8719] >>> Tarea Colision
+
+[ 0.9042] --- Tarea Colision
+
+[ 0.9210] ..# Joystick:  83 0
+[ 0.9402] ..# MSSG: Cabeceo y alabeo:
+[ 0.9635] ..# Pitch:  30
+[ 0.9802] ..# Roll:  0
+[ 0.9958] --- T
+[ 1.0040] >>> Tarea Altitud+Posicion
+[ 1.0296] %L(1): off
+[ 1.0528] --- Tarea Altitud+Posicion
+
+[ 1.0723]
+[ 1.0774] >>> Tarea Colision
+
+[ 1.1096] --- Tarea Colision
+ >>> Tarea Velocidad
+[ 1.1518] %L(2): off
+[ 1.1654] --- Tarea Velocidad
+area Display
+
+[ 1.1879] >>> Tarea Display
+[ 1.2073] >>> Tarea Altitud+Posicion
+[ 1.2327] %L(1): off
+[ 1.2559] --- Tarea Altitud+Posicion
+
+[ 1.2922] ..# MSSG: Altitud actual: 
+[ 1.3150] ..# Alti
+[ 1.
+[ 1.3272] >>> Tarea Colision
+
+[ 1.3594] --- Tarea Colision
+3247] >>> Tarea Velocidad
+[ 1.4046] >>> Tarea Altitud+Posicion
+[ 1.4300] %L(1): off
+[ 1.4532] --- Tarea Altitud+Posicion
+
+[ 1.4726] %L(2): off
+[ 1.4862] --- Tarea Velocidad
+tude:  8180
+[ 1.5116] ..# MSSG: Potencia de los motores: 
+[ 1.5390] ..# Pilot_Power:  800
+[ 1.5592] ..# MSSG: Velocidad tran
+[ 1.5771] >>> Tarea Colision
+
+[ 1.6079] >>> Tarea Altitud+Posicion
+[ 1.6333] %L(1): off
+[ 1.6565] --- Tarea Altitud+Posicion
+
+[ 1.6769] --- Tarea Colision
+
+[ 1.6922] >>> Tarea Velocidad
+[ 1.7243] %L(2): off
+[ 1.7379] --- Tarea Velocidad
+sferida de los motores (Km/h): 
+[ 1.7735] ..# Speed:  960
+[ 1.7907] ..# MSSG: Posici
+[ 1.8044] >>> Tarea Altitud+Posicion
+[ 1.8301] %L(1): off
+[ 1.8533] --- Tarea Altitud+Posicion
+
+[ 1.8727] >>> Tarea Colision
+
+[ 1.9050] --- Tarea Colision
+on del jo
+[ 1.9249] >>> Tarea Velocidad
+[ 1.9570] %L(2): off
+[ 1.9706] --- Tarea Velocidad
+ystick: 
+[ 1.9944] ..# Joys
+[ 2.0041] >>> Tarea Altitud+Posicion
+[ 2.0295] %L(1): off
+[ 2.0528] --- Tarea Altitud+Posicion
+tick:  3 0
+[ 2.0773] >>> Tarea Colision
+
+[ 2.1095] --- Tarea Colision
+
+[ 2.1286] ..# MSSG: Cabeceo y alabeo:
+[ 2.1519] ..# Pitch:  0
+[ 2.1680] ..# Roll:  0
+[ 2.1837] --- Tarea Display
+
+[ 2.1985] 
+[ 2.2041] >>> Tarea Altitud+Posicion
+[ 2.2298] %L(1): off
+[ 2.2530] --- Tarea Altitud+Posicion
+
+[ 2.2724] >>> Tarea Velocidad
+[ 2.3045] %L(2): off
+[ 2.3181] --- Tar
+[ 2.3272] >>> Tarea Colision
+
+[ 2.3594] --- Tarea Colision
+ea Velocidad
+>>> Tarea Display
+[ 2.4065] >>> Tarea Altitud+Posicion
+[ 2.4319] %L(1): off
+[ 2.4551] --- Tarea Altitud+Posicion
+
+[ 2.4800] ..# MSSG: Altitud actual: 
+[ 2.5028] ..# Altitude:  8180
+[ 2.
+[ 2.5246] >>> Tarea Velocidad
+[ 2.5566] %L(2): off
+[ 2.5702] ---
+[ 2.5773] >>> Tarea Colision
+
+[ 2.6080] >>> Tarea Altitud+Posicion
+[ 2.6334] %L(1): off
+[ 2.6622] --- Tarea Altitud+Posicion
+
+[ 2.6826] --- Tarea Colision
+ Tarea Velocidad
+5220] ..# MSSG: Potencia de los motores: 
+[ 2.7315] ..# Pilot_Power:  800
+[ 2.7517] ..# MSSG: Velocidad transferida de los motores (Km/h): 
+[ 2.7894] ..# Speed:  960
+[ 2.8038] >>> Tarea Altitud+Posicion
+[ 2.8295] %L(1): off
+[ 2.8583] --- Tarea Altitud+Posicion
+
+[ 2.8777] >>> Tarea Colision
+
+[ 2.9100] --- Tarea Colision
+
+[ 2.9253] >>> Tarea Velocidad
+[ 2.9573] %L(2): off
+[ 2.9709] --- Tarea Velocidad
+
+[ 2.9890] ..# MSSG: Posicion 
+[ 3.0043] >>> Tarea Altitud+Posicion
+[ 3.0297] %L(1): off
+[ 3.0585] --- Tarea Altitud+Posicion
+
+[ 3.0779] >>> Tarea Colision
+
+[ 3.1102] --- Tarea Colision
+
+[ 3.1255] >>> Tarea Velocidad
+[ 3.1576] %L(2): off
+[ 3.1712] --- Tarea Velocidad
+del joystick: 
+[ 3.1981] .
+[ 3.2042] >>> Tarea Altitud+Posicion
+[ 3.2296] %L(1): off
+[ 3.2584] --- Tarea Altitud+Posicion
+.# Joystick:  1-3
+[ 3.2904] ..# MSSG: Cabeceo y alabeo:
+[ 3.3137] ..# Pitch:  0
+[ 3.3268] >>> Tarea Colision
+
+[ 3.3518] %BEEEEEEEEEEP 4
+[ 3.3729] --- Tarea Colision
+
+[ 3.3907] ..# Roll:  0
+[ 3.4037] >>> Tarea Altitud+Posicion
+[ 3.4294] %L(1): off
+[ 3.4581] --- Tarea Altitud+Posicion
+
+[ 3.4776] >>> Tarea Velocidad
+[ 3.5096] %L(2): off
+[ 3.5232] --- Tarea Velocidad
+
+[ 3.5410] --- Tarea Display
+
+[ 3.5559] >>> Tarea Display
+[ 3.5769] >>> Tarea Colision
+
+[ 3.
+[ 3.6044] >>> Tarea Altitud+Posicion
+[ 3.6298] %L(1): off
+[ 3.6586] --- Tarea Altitud+Posicion
+6018] %BEEEEEEEEEEP 4
+[ 3.6966] %BEEEEEEEEEEP 4
+[ 3.7105] ..# MSSG: Desvio automatico
+[ 3.7513] --- Tarea Colision
+
+[ 3.7667] >>> Tarea Velocidad
+[ 3.7987] 
+[ 3.8043] >>> Tarea Altitud+Posicion
+[ 3.8232] --- Tarea Altitud+Posicion
+
+[ 3.8427] >>> Tarea Colision
+
+[ 3.8581] ..# MSSG: Desvio auto. en curso:  12
+[ 3.8861] --- Tarea Colision
+%L(2): off
+[ 3.9094] --- Tarea Velocidad
+
+[ 3.9404] ..# MSSG: Altitud actual: 
+[ 3.9632] ..# Altitude:  8420
+[ 3.9824] ..# MSSG: Potencia de los motore
+[ 4.0044] >>> Tarea Altitud+Posicion
+[ 4.0234] --- Tarea Altitud+Posicion
+
+[ 4.0428] >>> Tarea Velocidad
+[ 4.
+[ 4.0774] >>> Tarea Colision
+
+[ 4.0928] ..# MSSG: Desvio auto. en curso:  11
+[ 4.1208] --- Tarea Colision
+0749] %L(2): off
+[ 4.1472] --- Tarea Velocidad
+s: 
+[ 4.1685] ..# Pilot_Power:  700
+[ 4.1887] ..# MSSG: Velocidad
+[ 4.2040] >>> Tarea Altitud+Posicion
+[ 4.2230] --- Tarea Altitud+Posicion
+ transferida de los motores (Km/h): 
+[ 4.2647] ..# Speed:  990
+[ 4.2819] ..# MSSG: Posicion del joystick: 
+[ 4.3083] ..# Joystick:  45-3
+[ 4.3
+[ 4.3274] >>> Tarea Colision
+
+[ 4.3428] ..# MSSG: Desvio auto. en curso:  10
+[ 4.3708] --- Tarea Colision
+244] >>> Tarea Velocidad
+[ 4.4057] >>> Tarea Altitud+Posicion
+[ 4.4246] --- Tarea Altitud+Posicion
+
+[ 4.4529] %L(2): off
+[ 4.4665] --- Tarea Velocidad
+
+[ 4.4849] ..# MSSG: Cabeceo y alabeo:
+[ 4.5082] ..# Pitch:  20
+[ 4.5249] ..# Roll:  3
+[ 4.5405] --- Tarea Display
+
+[ 4.5553] >>> Tarea Display
+[ 4.5787] >>> Tarea Colision
+
+[ 4.5940] ..# MSSG:
+[ 4.6042] >>> Tarea Altitud+Posicion
+[ 4.6232] --- Tarea Altitud+Posicion
+ Desvio auto. en curso:  9
+[ 4.6599] --- Tarea Colision
+
+[ 4.6752] >>> Tarea Velocidad
+[ 4.7073] %L(2): off
+[ 4.7209] --- Tarea Velocidad
+
+[ 4.7496] ..# MSSG: Altitud actual: 
+[ 4.7724] ..# Altitude:  8520
+[ 4.7916] ..# MSSG: Pote
+[ 4.8043] >>> Tarea Altitud+Posicion
+[ 4.8233] --- Tarea Altitud+Posicion
+
+[ 4.8427] >>> Tarea Colision
+
+[ 4.8581] ..# MSSG: Desvio auto. en curso:  8
+[ 4.8856] --- Tarea Colision
+ncia de los motores: 
+[ 4.9156] ..# Pil
+[ 4.9248] >>> Tarea Velocidad
+[ 4.9568] %L(2): off
+[ 4.9704] --- Tarea Velocidad
+ot_Power:  600
+[ 4.9973] ..
+[ 5.0039] >>> Tarea Altitud+Posicion
+[ 5.0229] --- Tarea Altitud+Posicion
+# MSSG: Velocidad transferida de los motores (Km/h): 
+[ 5.073
+[ 5.0774] >>> Tarea Colision
+
+[ 5.0928] ..# MSSG: Desvio auto. en curso:  7
+[ 5.1203] --- Tarea Colision
+3] ..# Speed:  870
+[ 5.1487] ..# MSSG: Posicion del joystick: 
+[ 5.1751] ..# Joystick:  47 1
+[ 5.1943] ..# MSSG
+[ 5.2040] >>> Tarea Altitud+Posicion
+[ 5.2229] --- Tarea Altitud+Posicion
+
+[ 5.2424] >>> Tarea Velocidad
+[ 5.2744] %L(2): off
+[ 5.2880] --- Tarea Velocidad
+: Cabeceo y alabeo:
+[ 5.3175] ..# Pitc
+[ 5.3272] >>> Tarea Colision
+
+[ 5.3425] ..# MSSG: Desvio auto. en curso:  6
+[ 5.3700] --- Tarea Colision
+h:  20
+[ 5.3923] ..# Roll:  3
+[ 5.4041] >>> Tarea Altitud+Posicion
+[ 5.4230] --- Tarea Altitud+Posicion
+
+[ 5.4461] --- Tarea Display
+
+[ 5.4609] >>> Tarea Display
+[ 5.4976] ..# MSSG: Altitud actual: 
+[ 5.5204
+[ 5.5250] >>> Tarea Velocidad
+[ 5.5594] --- Tarea Velocidad
+] ..
+[ 5.5773] >>> Tarea Colision
+
+[ 5.5926] ..# MSSG: De
+[ 5.6044] >>> Tarea Altitud+Posicion
+[ 5.6233] --- Tarea Altitud+Posicion
+svio auto. en curso:  5
+[ 5.6585] --- Tarea Colision
+# Altitude:  8520
+[ 5.6865] ..# MSSG: Potencia de los motores: 
+[ 5.7138] ..# Pilot_Power:  900
+[ 5.7341] ..# MSSG: Velocidad transferida de los motores (Km/h): 
+[ 5.7717] ..# Speed:  1000
+[ 5.7894] ..# MSSG: Posicion
+[ 5.8042] >>> Tarea Altitud+Posicion
+[ 5.8232] --- Tarea Altitud+Posicion
+
+[ 5.8426] >>> Tarea Colision
+
+[ 5.8580] ..# MSSG: Desvio auto. en curso:  4
+[ 5.8855] --- Tarea Colision
+
+[ 5.9008] >>> Tarea Velocidad
+[ 5.9352] --- Tarea Velocidad
+ del joystick: 
+[ 5.9626] ..# Joystick:  45 33
+[ 5.9823] ..# MSSG: Cabeceo y alabeo:
+[ 6.0037] >>> Tarea Altitud+Posicion
+[ 6.0227] --- Tarea Altitud+Posicion
+
+[ 6.0434] ..# Pitch:  20
+[ 6.0600] ..# Roll:  3
+[ 
+[ 6.0772] >>> Tarea Colision
+
+[ 6.0925] ..# MSSG: Desvio auto. en curso:  3
+[ 6.1200] --- Tarea Colision
+
+[ 6.1354] >>> Tarea Velocidad
+[ 6.1697] --- Tarea Velocidad
+6.0757] --- Tarea Display
+
+[ 6.1989]
+[ 6.2040] >>> Tarea Altitud+Posicion
+[ 6.2230] --- Tarea Altitud+Posicion
+ >>> Tarea Display
+[ 6.2740] ..# MSSG: Altitud actual: 
+[ 6.2968] ..# Altitude:  8520
+[ 6.3160] ..# MSSG: P
+[ 6.3273] >>> Tarea Colision
+
+[ 6.3426] ..# MSSG: Desvio auto. en curso:  2
+[ 6.3701] --- Tarea Colision
+otencia de los motores: 
+[ 6.
+[ 6.4042] >>> Tarea Altitud+Posicion
+[ 6.4231] --- Tarea Altitud+Posicion
+
+[ 6.4426] >>> Tarea Velocidad
+[ 6.4769] --- Tarea Velocidad
+4016] ..# Pilot_Power:  900
+[ 6.5105] ..# MSSG: Velocidad transferida de los motores (Km/h): 
+[ 6.5481] ..# Speed:  1000
+[ 6.5658] ..# MSSG: P
+[ 6.5770] >>> Tarea Colision
+
+[ 6.5924] ..# MSSG: De
+[ 6.6042] >>> Tarea Altitud+Posicion
+[ 6.6231] --- Tarea Altitud+Posicion
+svio auto. en curso:  1
+[ 6.6583] --- Tarea Colision
+osicion del joystick: 
+[ 6.6888] ..# Joystick:  45 60
+[ 6.7085] ..# MSSG: Cabeceo y a
+[ 6.7248] >>> Tarea Velocidad
+[ 6.7592] --- Tarea Velocidad
+labeo:
+[ 6.7820] ..# Pitch:  20
+[ 6.7987] 
+[ 6.8043] >>> Tarea Altitud+Posicion
+[ 6.8232] --- Tarea Altitud+Posicion
+
+[ 6.8427] >>> Tarea Colision
+
+[ 6.8692] ..# MSSG: Desvio auto. finalizado
+[ 6.8956] --- Tarea Colision
+..# Roll:  3
+[ 6.9210] --- Tarea Display
+
+[ 6.9358] >>> Programa Principal
+[ 6.9527] --- Programa Principal
+[ 7.0037] >>> Tarea Altitud+Posicion
+[ 7.0294] %L(1): off
+[ 7.0581] --- Tarea Altitud+Posicion
+
+[ 7.0776] >>> Tarea Colision
+
+[ 7.1026] %BEEEEEEEEEEP 4
+[ 7.1164] ..# MSSG: Desivio automatico
+[ 7.1645] --- Tarea Colision
+
+[ 7.1798] >>> Tarea Velocidad
+[ 7.2081] >>> Tarea Altitud+Posicion
+[ 7.2270] --- Tarea Altitud+Posicion
+
+[ 7.2520] --- Tarea Velocidad
+
+[ 7.2678] >>> Tarea Display
+[ 7.3046] ..# MSSG: Altitud actual: 
+[ 7.3
+[ 7.3274] >>> Tarea Colision
+
+[ 7.3428] ..# MSSG: Desvio auto. en curso:  12
+[ 7.3708] --- Tarea Colision
+244] >>> Tarea Velocidad
+[ 7.4057] >>> Tarea Altitud+Posicion
+[ 7.4246] --- Tarea Altitud+Posicion
+
+[ 7.4553] --- Tarea Velocidad
+
+[ 7.4735] ..# Altitude:  8580
+[ 7.4927] ..# MSSG: Potencia de los motores: 
+[ 7.5201] ..# Pilot_Power:  1000
+[ 7.5409] ..# MSSG: Velocidad transferida de los motores (Km/h): 
+[ 7.5768] >>> Tarea Colision
+
+[ 7.5922] ..# MSSG: De
+[ 7.6039] >>> Tarea Altitud+Posicion
+[ 7.6229] --- Tarea Altitud+Posicion
+svio auto. en curso:  11
+[ 7.6586] --- Tarea Colision
+
+[ 7.6739] >>> Tarea Velocidad
+[ 7.7083] --- Tarea Velocidad
+
+[ 7.7253] ..# Speed:  1000
+[ 7.7429] ..# MSSG: Posicion del joystick: 
+[ 7.7693] ..# Joystick:  45 5
+[ 7.7885] ..# MSSG: Cabeceo y 
+[ 7.8044] >>> Tarea Altitud+Posicion
+[ 7.8233] --- Tarea Altitud+Posicion
+
+[ 7.8428] >>> Tarea Colision
+
+[ 7.8581] ..# MSSG: Desvio auto. en curso:  10
+[ 7.8861] --- Tarea Colision
+alabeo:
+[ 7.9090] ..# Pitch:  30
+[ 7.9243] >>> Tarea Velocidad
+[ 7.9586] --- Tarea Velocidad
+
+[ 7.9751] ..# Roll:  45
+[ 7.9913] ..# MSSG: Alab
+[ 8.0040] >>> Tarea Altitud+Posicion
+[ 8.0230] --- Tarea Altitud+Posicion
+eo excesivo!
+[ 8.0525] --- Tarea Display
+
+[ 8.0768] >>> Tarea Colision
+
+[ 8.0921] ..# MSSG: Desvio auto. en curso:  9
+[ 8.1196] --- Tarea Colision
+
+[ 8.1873] >>> Tarea Display
+[ 8.2066] >>> Tarea Altitud+Posicion
+[ 8.2256] --- Tarea Altitud+Posicion
+
+[ 8.2450] >>> Tarea Velocidad
+[ 8.2794] --- Tarea Velocidad
+
+[ 8.3121] ..# MSSG: Altitud a
+[ 8.3274] >>> Tarea Colision
+
+[ 8.3428] ..# MSSG: Desvio auto. en curso:  8
+[ 8.3703] --- Tarea Colision
+ctual: 
+[ 8.3931] ..# Altitud
+[ 8.4043] >>> Tarea Altitud+Posicion
+[ 8.4233] --- Tarea Altitud+Posicion
+e:  8580
+[ 8.4507] ..# MSSG: Potencia de los motores: 
+[ 8.4781] ..# Pilot_Power:  1020
+[ 8.4989] ..# MSSG: Velocidad transferida de los m
+[ 8.5249] >>> Tarea Velocidad
+[ 8.5593] --- Tarea Velocidad
+otor
+[ 8.5772] >>> Tarea Colision
+
+[ 8.5926] ..# MSSG: De
+[ 8.6043] >>> Tarea Altitud+Posicion
+[ 8.6233] --- Tarea Altitud+Posicion
+svio auto. en curso:  7
+[ 8.6585] --- Tarea Colision
+es (Km/h): 
+[ 8.6833] ..# Speed:  1000
+[ 8.7010] ..# MSSG: Posicion del joystick: 
+[ 8.7274] ..# Joystick:  18 2
+[ 8.7466] ..# MSSG: Cabeceo y alabeo:
+[ 8.7699] ..# Pitch:  30
+[ 8.7865] ..# Roll:  45
+[
+[ 8.8037] >>> Tarea Altitud+Posicion
+[ 8.8226] --- Tarea Altitud+Posicion
+
+[ 8.8421] >>> Tarea Colision
+
+[ 8.8575] ..# MSSG: Desvio auto. en curso:  6
+[ 8.8850] --- Tarea Colision
+
+[ 8.9003] >>> Tarea Velocidad
+[ 8.9347] --- Tarea Velocidad
+ 8.8027] ..# MSSG: Alabeo excesivo!
+[ 8.9723] --- Tarea Display
+
+[ 9.0037] >>> Tarea Altitud+Posicion
+[ 9.0226] --- Tarea Altitud+Posicion
+
+[ 9.0768] >>> Tarea Colision
+
+[ 9.0921] ..# MSSG: Desvio auto. en curso:  5
+[ 9.1196] --- Tarea Colision
+
+[ 9.1350] >>> Tarea Velocidad
+[ 9.1694] --- Tarea Velocidad
+
+[ 9.1874] >>> Tarea Display
+[ 9.2066] >>> Tarea Altitud+Posicion
+[ 9.2256] --- Tarea Altitud+Posicion
+
+[ 9.2619] ..# MSSG: Altitud actual: 
+[ 9.2847] ..# Altitude:  8580
+[ 9.3039] ..# MSSG: Potencia de los motores: 
+[ 9.3274] >>> Tarea Colision
+
+[ 9.3428] ..# MSSG: Desvio auto. en curso:  4
+[ 9.3703] --- Tarea Colision
+
+[ 9.3895] ..# Pilot_Power:  
+[ 9.4043] >>> Tarea Altitud+Posicion
+[ 9.4233] --- Tarea Altitud+Posicion
+
+[ 9.4427] >>> Tarea Velocidad
+[ 9.4771] --- Tarea Velocidad
+1020
+[ 9.4989] ..# MSSG: Velocidad transferida de los motores (Km/h): 
+[ 9.5365] ..# Speed:  1000
+[ 9.5542] ..# MSSG: Posicion del joystick: 
+[ 9.5768] >>> Tarea Colision
+
+[ 9.5922] ..# MSSG: De
+[ 9.6039] >>> Tarea Altitud+Posicion
+[ 9.6229] --- Tarea Altitud+Posicion
+svio auto. en curso:  3
+[ 9.6580] --- Tarea Colision
+
+[ 9.6765] ..# Joystick:  2 1
+[ 9.6952] ..# MSSG: Cabeceo y alabeo:
+[ 9.7185] .
+[ 9.7246] >>> Tarea Velocidad
+[ 9.7590] --- Tarea Velocidad
+.# Pitch:  30
+[ 9.7854] ..# Roll:  45
+[ 9.
+[ 9.8041] >>> Tarea Altitud+Posicion
+[ 9.8230] --- Tarea Altitud+Posicion
+
+[ 9.8425] >>> Tarea Colision
+
+[ 9.8578] ..# MSSG: Desvio auto. en curso:  2
+[ 9.8853] --- Tarea Colision
+8015] ..# MSSG: Alabeo excesivo!
+[ 9.9209] --- Tarea Display
+
+[ 10.003] >>> Tarea Altitud+Posicion
+[ 10.022] --- Tarea Altitud+Posicion
+
+[ 10.042] >>> Tarea Velocidad
+[
+[ 10.077] >>> Tarea Colision
+
+[ 10.092] ..# MSSG: Desvio auto. en curso:  1
+[ 10.120] --- Tarea Colision
+ 10.076] --- Tarea Velocidad
+
+[ 10.187] >>> Tarea Display
+[ 10.206] >>> Tarea Altitud+Posicion
+[ 10.225] --- Tarea Altitud+Posicion
+
+[ 10.261] ..# MSSG: Altitud actual: 
+[ 10.284] ..# Altitude:  8580
+[ 10.303] ..# MSSG: Potencia de los moto
+[ 10
+[ 10.327] >>> Tarea Colision
+
+[ 10.353] ..# MSSG: Desvio auto. finalizado
+[ 10.380] --- Tarea Colision
+.324] >>> Tarea V
+[ 10.404] >>> Tarea Altitud+Posicion
+[ 10.429] %L(1): off
+[ 10.453] --- Tarea Altitud+Posicion
+elocidad
+[ 10.495] --- Tarea Velocidad
+res: 
+[ 10.517] ..# Pilot_Power:  800
+[ 10.538] ..# MSSG: Velocidad transferida de los motores (Km/h): 
+[
+[ 10.576] >>> Tarea Colision
+
+[ 10.607] >>> Tarea Altitud+Posicion
+[ 10.632] %L(1): off
+[ 10.656] --- Tarea Altitud+Posicion
+
+[ 10.676] --- Tarea Colision
+
+[ 10.691] >>> Tarea Velocidad
+[ 10.724] %L(2): off
+[ 10.737] --- Tarea Velocidad
+ 10.575] ..# Speed:  1000
+[ 10.770] ..# MSSG: Posicion del joystick: 
+[ 10.796] ..# 
+[ 10.804] >>> Tarea Altitud+Posicion
+[ 10.829] %L(1): off
+[ 10.853] --- Tarea Altitud+Posicion
+
+[ 10.872] >>> Tarea Colision
+
+[ 10.897] %BEEEEEEEEEEP 4
+[ 10.918] --- Tarea Colision
+
+[ 10.933] >>> Tarea Velocidad
+[ 10.966] %L(2): off
+[ 10.979] --- Tarea Velocidad
+Joystick:  2 1
+[ 11.003] >>> Tarea Altitud+Posicion
+[ 11.029] %L(1): off
+[ 11.052] --- Tarea Altitud+Posicion
+
+[ 11.
+[ 11.077] >>> Tarea Colision
+
+[ 11.109] --- Tarea Colision
+074] ..# MSSG: Cabeceo y alabeo:
+[ 11.144] ..# Pitch:  30
+[ 11.161] ..# Roll:  45
+[ 11.177] ..# MSSG: Alabeo excesivo!
+[ 11.2
+[ 11.204] >>> Tarea Altitud+Posicion
+[ 11.229] %L(1): off
+[ 11.252] --- Tarea Altitud+Posicion
+
+[ 11.272] >>> Tarea Velocidad
+[ 11.304] %L(2): off
+[ 11.317] --- Tar
+[ 11.327] >>> Tarea Colision
+
+[ 11.359] --- Tarea Colision
+ea Velocidad
+00] --- Tarea Display
+
+[ 11.392] >>> Tarea Di
+[ 11.404] >>> Tarea Altitud+Posicion
+[ 11.429] %L(1): off
+[ 11.453] --- Tarea Altitud+Posicion
+splay
+[ 11.497] ..# MSSG: Altitud actual: 
+[ 11.520
+[ 11.524] >>> Tarea Velocidad
+[ 11.556] %L(2): off
+[ 11.570] --
+[ 11.577] >>> Tarea Colision
+
+[ 11.607] >>> Tarea Altitud+Posicion
+[ 11.633] %L(1): off
+[ 11.656] --- Tarea Altitud+Posicion
+
+[ 11.676] --- Tarea Colision- Tarea Velocidad
+] ..# Altitude:  8580
+[ 11.715] ..# MSSG: Potencia de los motores: 
+[ 11.742] ..# Pilot_Power:  800
+[ 11.763] ..# MSSG: Velocidad transferida de los motores (Km/h): 
+[ 11.8
+[ 11.804] >>> Tarea Altitud+Posicion
+[ 11.829] %L(1): off
+[ 11.853] --- Tarea Altitud+Posicion
+
+[ 11.872] >>> Tarea Colision
+
+[ 11.904] --- Tarea Colision
+
+[ 11.920] >>> Tarea Velocidad
+[ 11.952] %L(2): off
+[ 11.966] --- Tarea Velocidad
+00] ..# Speed:  960
+[ 11.995] ..# MS
+[ 12.004] >>> Tarea Altitud+Posicion
+[ 12.029] %L(1): off
+[ 12.052] --- Tarea Altitud+Posicion
+SG: Posici
+[ 12.077] >>> Tarea Colision
+
+[ 12.109] --- Tarea Colision
+
+[ 12.124] >>> Tarea Velocidad
+[ 12.156] %L(2): off
+[ 12.170] --- Tarea Velocidad
+on del joystick: 
+[ 12.198]
+[ 12.204] >>> Tarea Altitud+Posicion
+[ 12.229] %L(1): off
+[ 12.252] --- Tarea Altitud+Posicion
+ ..# Joystick:  1-3
+[ 12.285] ..# MSSG: Cabeceo y alabeo:
+[ 12.309] ..# Pitch:  0
+[ 1
+[ 12.327] >>> Tarea Colision
+
+[ 12.359] --- Tarea Colision
+2.325] ..# Roll: -3
+[ 12.388] --- Tarea Display
+
+[
+[ 12.404] >>> Tarea Altitud+Posicion
+[ 12.429] %L(1): off
+[ 12.453] --- Tarea Altitud+Posicion
+
+[ 12.472] >>> Tarea Velocidad
+[ 12.504] %L(2): off
+[ 12.518] --- Tarea Velocidad
+ 12.403] >>> Tarea Display
+[ 12.569] ..# 
+[ 12.577] >>> Tarea Colision
+
+[ 12.608] >>> Tarea Altitud+Posicion
+[ 12.633] %L(1): off
+[ 12.656] --- Tarea Altitud+Posicion
+
+[ 12.677] --- Tarea Colision
+MSSG: Altitud actual: 
+[ 12.707] ..# Altitude:  8580
+[ 12.724] >>> Tarea Velocidad
+[ 12.756] %L(2): off
+[ 12.770] --- Tarea Velocidad
+
+[ 12.787] ..# MSSG: Potencia de
+[ 12.803] >>> Tarea Altitud+Posicion
+[ 12.829] %L(1): off
+[ 12.858] --- Tarea Altitud+Posicion
+
+[ 12.881] >>> Tarea Colision
+
+[ 12.902] %BEEEEEEEEEEP 4
+[ 12.916] ..# MSSG: Desivio automatico
+[ 12.964] %BEEEEEEEEEEP 4
+[ 12.978] ..# MSSG: Desvio automatico
+[ 13.007] >>> Tarea Altitud+Posicion
+[ 13.026] --- Tarea Altitud+Posicion
+
+[ 13.056] --- Tarea Colision
+
+[ 13.072]
+[ 13.077] >>> Tarea Colision
+
+[ 13.092] ..# MSSG: Desvio auto. en curso:  12
+[ 13.120] --- Tarea Colision
+ >>> Tarea Velocidad
+[ 13.162] %L(2): off
+[ 13.176] --- Tarea Velocidad los motores: 
+[
+[ 13.203] >>> Tarea Altitud+Posicion
+[ 13.222] --- Tarea Altitud+Posicion
+ 13.202] ..# Pilot_Power:  800
+[ 13.261] ..# MSSG: Velocidad transferida de los motores (Km/h): 
+[ 13.299] ..# Speed:  960
+[ 13.316] ..# MS
+[ 13
+[ 13.327] >>> Tarea Colision
+
+[ 13.342] ..# MSSG: Desvio auto. en curso:  11
+[ 13.370] --- Tarea Colision
+.324] >>> Tarea Velocidad
+[ 13.406] >>> Tarea Altitud+Posicion
+[ 13.425] --- Tarea Altitud+Posicion
+
+[ 13.455] --- Tarea Velocidad
+SG: Posicion del joystick: 
+[ 13.489] ..# Joystick: -15 3
+[ 13.508] ..# MSSG: Cabeceo y alabeo:
+[ 13.531] ..# Pitch:  0
+[ 13.548] ..# Roll: -3
+[ 13.563] --- Tarea Displa
+[ 13.577] >>> Tarea Colision
+
+[ 13.592] ..# MSSG: D
+[ 13.604] >>> Tarea Altitud+Posicion
+[ 13.623] --- Tarea Altitud+Posicion
+esvio auto. en curso:  10
+[ 13.659] --- Tarea Colision
+
+[ 13.674] >>> Tarea Velocidad
+[ 13.708] --- Tarea Velocidad
+y
+
+[ 13.725] >>> Tarea Display
+[ 13.762] ..# MSSG: Altitud actual: 
+[ 13.785] ..# Altitude:  8540
+[ 13.803] >>> Tarea Altitud+Posicion
+[ 13.822] --- Tarea Altitud+Posicion
+
+[ 13.842] >>> Tarea Colision
+
+[ 13.857] ..# MSSG: Desvio auto. en curso:  9
+[ 13.885] --- Tarea Colision
+
+[ 13.900] ..# MSSG: Potencia de los motores: 
+[ 13.924] >>> Tarea Velocidad
+[ 13.958] --- Tarea Velocidad
+
+[ 13.977] ..# Pilot_Power:  800
+[ 13.997] ..
+[ 14.004] >>> Tarea Altitud+Posicion
+[ 14.023] --- Tarea Altitud+Posicion
+# MSSG: Velocidad transferida de los motores (Km/h): 
+[ 14.0
+[ 14.077] >>> Tarea Colision
+
+[ 14.092] ..# MSSG: Desvio auto. en curso:  8
+[ 14.120] --- Tarea Colision
+73] ..# Speed:  1000
+[ 14.149] ..# MSSG: Posicion del joystick: 
+[ 14.175] ..# Joystick: -37 1
+[ 14.195] ..# MSS
+[ 14.204] >>> Tarea Altitud+Posicion
+[ 14.223] --- Tarea Altitud+Posicion
+
+[ 14.242] >>> Tarea Velocidad
+[ 14.277] --- Tarea Velocidad
+G: Cabeceo y alabeo:
+[ 14.307] ..# Pitch: -20
+[ 14.3
+[ 14.327] >>> Tarea Colision
+
+[ 14.342] ..# MSSG: Desvio auto. en curso:  7
+[ 14.370] --- Tarea Colision
+23] ..# Roll:  45
+[ 14.398] .
+[ 14.404] >>> Tarea Altitud+Posicion
+[ 14.423] --- Tarea Altitud+Posicion
+.# MSSG: Alabeo excesivo!
+[ 14.459] --- Tarea Display
+
+[ 14.474] >>> Tarea Display
+[ 14.510] ..# MSSG: Altitu
+[ 14.524] >>> Tarea Velocidad
+[ 14.558] --- Tarea Velocidad
+d act
+[ 14.577] >>> Tarea Colision
+
+[ 14.592] ..# MSSG: D
+[ 14.604] >>> Tarea Altitud+Posicion
+[ 14.622] --- Tarea Altitud+Posicion
+esvio auto. en curso:  6
+[ 14.658] --- Tarea Colision
+ual: 
+[ 14.680] ..# Altitude:  8540
+[ 14.699] ..# MSSG: Potencia de los motores: 
+[ 14.727] ..# Pilot_Power:  800
+[ 14.747] ..# MSSG: Velocidad transferida de los motores (Km/h): 
+[ 14.784] ..# Speed:  1000
+[ 
+[ 14.804] >>> Tarea Altitud+Posicion
+[ 14.823] --- Tarea Altitud+Posicion
+
+[ 14.842] >>> Tarea Colision
+
+[ 14.857] ..# MSSG: Desvio auto. en curso:  5
+[ 14.885] --- Tarea Colision
+
+[ 14.900] >>> Tarea Velocidad
+[ 14.935] --- Tarea Velocidad
+14.802] ..# MSSG: Posicion del joystick: 
+[ 14.975] ..# Joystick: -45-3
+[ 14.994] ..# MSS
+[ 15.004] >>> Tarea Altitud+Posicion
+[ 15.023] --- Tarea Altitud+Posicion
+G: Cabeceo y alabeo:
+[ 15.056] ..# Pitch: -20
+[ 15.07
+[ 15.077] >>> Tarea Colision
+
+[ 15.092] ..# MSSG: Desvio auto. en curso:  4
+[ 15.120] --- Tarea Colision
+
+[ 15.135] >>> Tarea Velocidad
+[ 15.169] --- Tarea Velocidad
+3] ..# Roll:  45
+[ 15.197] .
+[ 15.204] >>> Tarea Altitud+Posicion
+[ 15.222] --- Tarea Altitud+Posicion
+.# MSSG: Alabeo excesivo!
+[ 15.259] --- Tarea Display
+
+[ 15.273] >>> Tarea Display
+[ 15.310] ..# MSSG: Altitud actu
+[ 15.327] >>> Tarea Colision
+
+[ 15.342] ..# MSSG: Desvio auto. en curso:  3
+[ 15.370] --- Tarea Colision
+al: 
+[ 15.391] ..# Altitude: 
+[ 15.404] >>> Tarea Altitud+Posicion
+[ 15.423] --- Tarea Altitud+Posicion
+
+[ 15.442] >>> Tarea Velocidad
+[ 15.477] --- Tarea Velocidad
+ 8540
+[ 15.499] ..# MSSG: Potencia de los motores: 
+[ 15.526] ..# Pilot_Power:  900
+[ 15.547] ..# MSSG: Velocidad transferida de los motores (
+[ 15.577] >>> Tarea Colision
+
+[ 15.592] ..# MSSG: De
+[ 15.604] >>> Tarea Altitud+Posicion
+[ 15.623] --- Tarea Altitud+Posicion
+svio auto. en curso:  2
+[ 15.658] --- Tarea Colision
+Km/h): 
+[ 15.681] ..# Speed:  1000
+[ 15.699] ..# MSSG: Posicion del joystick: 
+[ 15.724] >>> Tarea Velocidad
+[ 15.758] --- Tarea Velocidad
+
+[ 15.774] ..# Joystick: -45 0
+[ 15.794] ..# MSSG:
+[ 15.804] >>> Tarea Altitud+Posicion
+[ 15.823] --- Tarea Altitud+Posicion
+
+[ 15.842] >>> Tarea Colision
+
+[ 15.858] ..# MSSG: Desvio auto. en curso:  1
+[ 15.885] --- Tarea Colision
+ Cabeceo y alabeo:
+[ 15.914] ..# Pitch: -20
+[ 15.930] ..# Roll:  45
+[ 15.946] ..# MSSG: Alabeo excesivo!
+[ 15.969] --- Tarea Display
+
+[ 16.003] >>> Tarea Altitud+Posicion
+[ 16.022] --- Tarea Altitud+Posicion
+
+[ 16.042] >>> Tarea Velocidad
+[
+[ 16.077] >>> Tarea Colision
+
+[ 16.104] ..# MSSG: Desvio auto. finalizado
+[ 16.130] --- Tarea Colision
+ 16.076] --- Tarea Velocidad
+
+[ 16.187] >>> Tarea Display
+[ 16.206] >>> Tarea Altitud+Posicion
+[ 16.232] %L(1): off
+[ 16.260] --- Tarea Altitud+Posicion
+
+[ 16.297] ..# MSSG: Altitud actual: 
+[ 16.319]
+[ 1
+[ 16.327] >>> Tarea Colision
+
+[ 16.359] --- Tarea Colision
+6.325] >>> Tarea Velocidad
+[ 16.404] >>> Tarea Altitud+Posicion
+[ 16.430] %L(1): off
+[ 16.453] --- Tarea Altitud+Posicion
+
+[ 16.474] --- Tarea Velocidad
+ ..# Altitude:  8540
+[ 16.504] ..# MSSG: Potencia de los motores: 
+[ 16.531] ..# Pilot_Power:  900
+[ 16.552] ..# MSSG: Velocidad transferida de los
+[ 16.577] >>> Tarea Colision
+
+[ 1
+[ 16.604] >>> Tarea Altitud+Posicion
+[ 16.629] %L(1): off
+[ 16.652] --- Tarea Altitud+Posicion
+6.602] %BEEEEEEEEEEP 4
+[ 16.684] ..# MSSG: Desivio automatico
+[ 16.732] %BEEEEEEEEEEP 4
+[ 16.746] ..# MSSG: Desvio automatico
+[ 16.786] --- Tarea Colision
+
+[ 16
+[ 16.804] >>> Tarea Altitud+Posicion
+[ 16.823] --- Tarea Altitud+Posicion
+
+[ 16.842] >>> Tarea Colision
+
+[ 16.858] ..# MSSG: Desvio auto. en curso:  12
+[ 16.886] --- Tarea Colision
+.801] >>> Tarea Velocidad
+[ 16.933] --- Tarea Velocidad
+
+[ 16.949] >>> Tarea Velocidad
+[ 16.981] %L(2): off
+[ 16.994] --- Tar
+[ 17.004] >>> Tarea Altitud+Posicion
+[ 17.023] --- Tarea Altitud+Posicion
+ea Velocidad
+ motores (Km/h): 
+[ 17.061] ..# Speed:  1000
+[ 17.076] >>> Tarea Colision
+
+[ 17.092] ..# MSSG: Desvio auto. en curso:  11
+[ 17.120] --- Tarea Colision
+
+[ 17.137] ..# MSSG: Posicion del joystick: 
+[ 17.163] ..# Joystick: -15 0
+[ 17.183] ..# MSSG: Cabeceo y alabeo:
+[ 17.203] >>> Tarea Altitud+Posicion
+[ 17.222] --- Tarea Altitud+Posicion
+
+[ 17.242] >>> Tarea Velocidad
+[ 17.274] %L(2): off
+[ 17.287] --- Tarea Velocidad
+
+[ 17.305] ..# Pitch:  17
+[ 17.322]
+[ 17.327] >>> Tarea Colision
+
+[ 17.342] ..# MSSG: Desvio auto. en curso:  10
+[ 17.370] --- Tarea Colision
+ ..# Roll:  0
+[ 17.396] --- 
+[ 17.404] >>> Tarea Altitud+Posicion
+[ 17.423] --- Tarea Altitud+Posicion
+Tarea Display
+
+[ 17.449] >>> Tarea Display
+[ 17.486] ..# MSSG: Altitud actual: 
+[ 17.509] ..# Altitude:  8580
+[ 17.524] >>> Tarea Velocidad
+[ 17.559] --- Tarea Velocidad
+
+[ 17.576] >>> Tarea Colision
+
+[ 17.592] ..# MSSG: De
+[ 17.603] >>> Tarea Altitud+Posicion
+[ 17.622] --- Tarea Altitud+Posicion
+svio auto. en curso:  9
+[ 17.658] --- Tarea Colision
+
+[ 17.674] ..# MSSG: Potencia de los motores: 
+[ 17.702] ..# Pilot_Power:  100
+[ 17.722] ..# MSSG: Velocidad transferida de los motores (Km/h): 
+[ 17.759] ..# Speed:  300
+[ 17.777] ..# MSSG: Posicion del joystick: 
+[
+[ 17.804] >>> Tarea Altitud+Posicion
+[ 17.823] --- Tarea Altitud+Posicion
+
+[ 17.842] >>> Tarea Colision
+
+[ 17.858] ..# MSSG: Desvio auto. en curso:  8
+[ 17.885] --- Tarea Colision
+
+[ 17.901] >>> Tarea Velocidad
+[ 17.935] --- Tarea Velocidad
+ 17.803] ..# Joystick:  1-3
+[ 17.969] ..# MSSG: Cabeceo y alabeo:
+[ 17.992] ..# Pitch:  
+[ 18.004] >>> Tarea Altitud+Posicion
+[ 18.023] --- Tarea Altitud+Posicion
+0
+[ 18.046] ..# Roll:  45
+[ 18.063] ..# MSSG: Alabeo 
+[ 18.077] >>> Tarea Colision
+
+[ 18.092] ..# MSSG: Desvio auto. en curso:  7
+[ 18.120] --- Tarea Colision
+
+[ 18.135] >>> Tarea Velocidad
+[ 18.170] --- Tarea Velocidad
+excesivo!
+[ 18.194] --- Tare
+[ 18.204] >>> Tarea Altitud+Posicion
+[ 18.222] --- Tarea Altitud+Posicion
+a Display
+
+[ 18.247] >>> Tarea Display
+[ 18.284] ..# MSSG: Altitud actual: 
+[ 18.307] ..# Altitude:  8580
+[
+[ 18.327] >>> Tarea Colision
+
+[ 18.342] ..# MSSG: Desvio auto. en curso:  6
+[ 18.370] --- Tarea Colision
+ 18.326] ..# MSSG: Potencia de los mo
+[ 18.404] >>> Tarea Altitud+Posicion
+[ 18.423] --- Tarea Altitud+Posicion
+
+[ 18.442] >>> Tarea Velocidad
+[ 18.477] --- Tarea Velocidad
+tores: 
+[ 18.500] ..# Pilot_Power:  110
+[ 18.520] ..# MSSG: Velocidad transferida de los motores (Km/h): 
+[ 18.558] ..# Speed:  300
+[ 1
+[ 18.577] >>> Tarea Colision
+
+[ 18.592] ..# MSSG: D
+[ 18.604] >>> Tarea Altitud+Posicion
+[ 18.623] --- Tarea Altitud+Posicion
+esvio auto. en curso:  5
+[ 18.658] --- Tarea Colision
+8.575] ..# MSSG: Posicion del joystick: 
+[ 18.698] ..# Joystick:  3 0
+[ 18.717] ..# 
+[ 18.724] >>> Tarea Velocidad
+[ 18.759] --- Tarea Velocidad
+MSSG: Cabeceo y alabeo:
+[ 18.790] ..# Pitch:  0
+[ 18.803] >>> Tarea Altitud+Posicion
+[ 18.822] --- Tarea Altitud+Posicion
+
+[ 18.842] >>> Tarea Colision
+
+[ 18.857] ..# MSSG: Desvio auto. en curso:  4
+[ 18.884] --- Tarea Colision
+
+[ 18.902] ..# Roll:  45
+[ 18.918] ..# MSSG: Alabeo excesivo!
+[ 18.941] --- Tarea Display
+
+[ 19.003] >>> Tarea Altitud+Posicion
+[ 19.022] --- Tarea Altitud+Posicion
+
+[ 19.042] >>> Tarea Velocidad
+[
+[ 19.077] >>> Tarea Colision
+
+[ 19.092] ..# MSSG: Desvio auto. en curso:  3
+[ 19.120] --- Tarea Colision
+ 19.076] --- Tarea Velocidad
+
+[ 19.187] >>> Tarea Display
+[ 19.206] >>> Tarea Altitud+Posicion
+[ 19.225] --- Tarea Altitud+Posicion
+
+[ 19.261] ..# MSSG: Altitud actual: 
+[ 19.284] ..# Altitude:  8580
+[ 19.303] ..# MSSG: Potencia de los moto
+[ 19
+[ 19.327] >>> Tarea Colision
+
+[ 19.342] ..# MSSG: Desvio auto. en curso:  2
+[ 19.370] --- Tarea Colision
+.324] >>> Tarea Velocidad
+[ 19.405] >>> Tarea Altitud+Posicion
+[ 19.424] --- Tarea Altitud+Posicion
+
+[ 19.455] --- Tarea Velocidad
+res: 
+[ 19.477] ..# Pilot_Power:  800
+[ 19.497] ..# MSSG: Velocidad transferida de los motores (Km/h): 
+[ 19.535] ..# Speed:  1000
+[ 19.553] ..# MSSG: Posicion del joystick: 
+[ 19.576] >>> Tarea Colision
+
+[ 19.592] ..# MSSG: De
+[ 19.603] >>> Tarea Altitud+Posicion
+[ 19.622] --- Tarea Altitud+Posicion
+svio auto. en curso:  1
+[ 19.658] --- Tarea Colision
+
+[ 19.673] >>> Tarea Velocidad
+[ 19.707] --- Tarea Velocidad
+
+[ 19.725] ..# Joystick:  2 1
+[ 19.744] ..# MSSG: Cabeceo y alabeo:
+[ 19.767] ..# Pitch:  0
+[ 19.783] ..# Roll:  45
+[ 19.79
+[ 19.804] >>> Tarea Altitud+Posicion
+[ 19.822] --- Tarea Altitud+Posicion
+
+[ 19.842] >>> Tarea Colision
+
+[ 19.868] ..# MSSG: Desvio auto. finalizado
+[ 19.895] --- Tarea Colision
+9] ..# MSSG: Alabeo excesivo
+[ 19.925] >>> Tarea Velocidad
+[ 19.959] --- Tarea Velocidad
+!
+[ 19.979] --- Tarea Display
+
+[ 20.003] >>> Tarea Altitud+Posicion
+[ 20.029] %L(1): off
+[ 20.057] --- Tarea Altitud+Posicion
+
+[ 20.077] >>> Tarea Colision
+
+[ 20.109] --- Tarea Colision
+
+[ 20.187] >>> Tarea Display
+[ 20.206] >>> Tarea Altitud+Posicion
+[ 20.232] %L(1): off
+[ 20.260] --- Tarea Altitud+Posicion
+
+[ 20.280] >>> Tarea Velocidad
+[ 20.312] %L(2): off
+[
+[ 20.326] >>> Tarea Colision
+
+[ 20.359] --- Tarea Colision
+ 20.325] --- Tarea Velocidad
+
+[ 20.406] >>> Tarea Altitud+Posicion
