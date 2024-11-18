@@ -215,7 +215,6 @@ package body fss is
             --Display_Message("Velocidad objetivo decidido");
             --Display_Speed(targetSpeed);
             Finish_Activity("Tarea Velocidad");
-            New_Line;
             Next_Start := Next_Start + periodo;
             delay until Next_Start;
         end loop;
@@ -303,6 +302,7 @@ package body fss is
         periodo : constant Time_Span :=  Milliseconds(250);
         currentSpeed : Speed_Samples_Type;
         currentPitch : Pitch_Samples_Type;
+        currentLight : Light_Samples_Type;
     begin
         loop
             Start_Activity("Tarea Colision");
@@ -319,7 +319,6 @@ package body fss is
             else
                 currentSpeed := valores.getSpeed;
                 currentPitch := valores.getPitch;
-                currentLight := Light_Samples_Type;
                 Read_Light_Intensity(currentLight);
                 valores.getObstacle(obstacleDistance); --o usar la del devices direct?
                 --Display_Message("temita velocidad?");
